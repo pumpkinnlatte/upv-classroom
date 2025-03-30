@@ -1,44 +1,27 @@
 # upv-classroom
 
 Este proyecto está dividido en dos partes:
-- **Backend:** Laravel (API REST)
+- **Backend:** Express.js (API REST)
 - **Frontend:** React (SPA)
 
 ## 📌 Requisitos Previos
 Antes de comenzar, asegúrate de tener instalado:
-- **PHP 8.0+** (con Composer)
-- **Node.js 16+** (con npm o yarn)
-- **MySQL** o **PostgreSQL**
+- **Node.js 16+** (con npm)
+- **MySQL**
 - **Git**
 
 ---
-## 🚀 Instalación del Backend (Laravel)
+## 🚀 Instalación del Backend (Express)
 
-2. **Instalar las dependencias de Laravel:**
+1. **Instalar las dependencias de Laravel:**
    ```sh
    cd ./back-classroom
-   composer install
+   npm install express cors mysql2
    ```
 
-3. **Copiar el archivo de configuración y generar clave de aplicación:**
+2. **Iniciar el servidor:**
    ```sh
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-4. **Configurar la base de datos en el archivo `.env`**
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=nombre_de_tu_bd
-   DB_USERNAME=usuario
-   DB_PASSWORD=contraseña
-   ```
-
-5. **Iniciar el servidor:**
-   ```sh
-   php artisan serve --host=127.0.0.1 --port=8000
+   npm app.js
    ```
 
 ---
