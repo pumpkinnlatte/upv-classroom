@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-03-2025 a las 00:09:43
+-- Tiempo de generación: 31-03-2025 a las 01:51:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,10 +40,9 @@ CREATE TABLE `alumnos_clases` (
 
 CREATE TABLE `archivos` (
   `archivo_id` int(11) NOT NULL,
-  `nombre_archivo` varchar(255) NOT NULL,
-  `ruta_archivo` text NOT NULL,
-  `tipo` enum('tarea','entrega','material') NOT NULL,
-  `referencia_id` int(11) NOT NULL
+  `nombre_original` varchar(128) NOT NULL,
+  `fecha_creacion` datetime NOT NULL,
+  `nombre_en_storage` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,11 +113,20 @@ CREATE TABLE `temas` (
 CREATE TABLE `usuarios` (
   `usuario_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `matricula` varchar(64) NOT NULL,
+  `matricula` varchar(64) DEFAULT NULL,
   `nombre` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `rol` enum('profesor','alumno') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`usuario_id`, `email`, `matricula`, `nombre`, `password`, `rol`) VALUES
+(1, 'profesor01@upv.edu.mx', NULL, 'Luis Roberto', 'profesor01', 'profesor'),
+(2, 'profesor02@upv.edu.mx', NULL, 'Adriana Mota', 'profesor02', 'profesor'),
+(3, '2230343@upv.edu.mx', '2230343', 'Angel Ivan Cabrera Rojas', 'CABRERA298', 'alumno');
 
 --
 -- Índices para tablas volcadas
@@ -213,7 +221,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
