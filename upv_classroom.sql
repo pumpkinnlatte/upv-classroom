@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2025 a las 01:51:27
+-- Tiempo de generación: 31-03-2025 a las 06:32:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -75,6 +75,28 @@ CREATE TABLE `entregas` (
   `estado` enum('pendiente','entregado','calificado') NOT NULL DEFAULT 'pendiente',
   `calificacion` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `refresh_tokens`
+--
+
+CREATE TABLE `refresh_tokens` (
+  `refresh_token` varchar(255) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_generado` datetime NOT NULL,
+  `fecha_caduca` datetime NOT NULL,
+  `activo` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `refresh_tokens`
+--
+
+INSERT INTO `refresh_tokens` (`refresh_token`, `usuario_id`, `fecha_generado`, `fecha_caduca`, `activo`) VALUES
+('01JQN58C0JSVNRWA7VFH5QB8TC', 1, '2025-03-30 21:52:20', '2025-03-31 21:52:20', 1),
+('01JQN65T2CF2HNEDQPYP9GJ6G1', 3, '2025-03-30 22:08:25', '2025-03-31 22:08:25', 1);
 
 -- --------------------------------------------------------
 
@@ -162,6 +184,13 @@ ALTER TABLE `entregas`
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
+-- Indices de la tabla `refresh_tokens`
+--
+ALTER TABLE `refresh_tokens`
+  ADD PRIMARY KEY (`refresh_token`),
+  ADD UNIQUE KEY `usuario_id` (`usuario_id`);
+
+--
 -- Indices de la tabla `tareas`
 --
 ALTER TABLE `tareas`
@@ -246,6 +275,12 @@ ALTER TABLE `clases`
 ALTER TABLE `entregas`
   ADD CONSTRAINT `entregas_ibfk_1` FOREIGN KEY (`tarea_id`) REFERENCES `tareas` (`tarea_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `entregas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `refresh_tokens`
+--
+ALTER TABLE `refresh_tokens`
+  ADD CONSTRAINT `refresh_tokens_userId` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`);
 
 --
 -- Filtros para la tabla `tareas`
