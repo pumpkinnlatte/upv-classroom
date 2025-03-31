@@ -16,7 +16,7 @@ Antes de comenzar, asegúrate de tener instalado:
 1. **Instalar las dependencias de Laravel:**
    ```sh
    cd ./back-classroom
-   npm install express cors mysql2 bcrypt luxon ulid
+   npm install express cors mysql2 bcrypt luxon ulid jsonwebtoken
    ```
 
 2. **Iniciar el servidor:**

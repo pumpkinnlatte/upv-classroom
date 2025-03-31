@@ -1,9 +1,11 @@
-const bcrypt = require("bcrypt");
+const db = require("../data-access/db"); //Acceso a la base de datos
+
+const bcrypt = require("bcrypt"); //De momento no se usa
 const jwt = require("jsonwebtoken");
 const { ulid } = require("ulid");
 const {DateTime} = require("luxon"); //Manipular fechas y horas
+
 const config = require("../config.json").accountServiceConfig;
-const db = require("../data-access/db");
 const { use } = require("../routes/cuentasRouter");
 
 class AccountService {
@@ -27,7 +29,7 @@ class AccountService {
     }
 
     async getUserData(identifier, isUserId = false) {
-        const sql = "SELECT usuario_id, matricula, nombre, rol AS tipoUsuario FROM usuarios WHERE " + (isUserId ? "usuario_id" : "username") + " = ?";
+        const sql = "SELECT usuario_id, email, matricula, nombre, rol AS tipoUsuario FROM usuarios WHERE " + (isUserId ? "usuario_id" : "username") + " = ?";
         const [[user]] = await db.query(sql, [identifier]);
         return user || null;
     }
@@ -36,8 +38,8 @@ class AccountService {
         const userData = await this.getUserData(userId, true);
         if (!userData) return null;
         return jwt.sign({
-            userId: userData.id,
-            username: userData.username,
+            userId: userData.usuario_id,
+            matricula: userData.matricula,
             exp: Math.floor(DateTime.now().plus({ seconds: this.accessTokenExpirationSec }).toSeconds())
         }, this.accessTokenSecret);
     }

@@ -1,0 +1,157 @@
+/* src/pages/CreateClassPage.css */
+
+.create-class-page {
+    padding: 40px;
+    max-width: 800px; /* Ancho máximo para el formulario */
+    margin: 40px auto; /* Centrado y con margen superior/inferior */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f8f9fa; /* Fondo general similar a otras páginas */
+  }
+  
+  /* Contenedor del formulario para darle estilo de tarjeta/panel */
+  .form-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+  }
+  
+  .page-title {
+    font-size: 1.8em;
+    color: #343a40;
+    margin-bottom: 30px;
+    text-align: center; /* Centra el título del formulario */
+    font-weight: 600;
+  }
+  
+  /* Estilos generales del formulario y grupos */
+  .create-class-form .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .create-class-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.95em;
+  }
+  
+  /* Indicador de campo obligatorio */
+  .required {
+      color: #e3342f; /* Rojo */
+      margin-left: 4px;
+  }
+  
+  /* Estilos para inputs, textarea, select (reutilizando/adaptando) */
+  .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #d2d6dc;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #2d3748;
+    background-color: #fdfdff; /* Fondo casi blanco */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 48px; /* Altura consistente */
+  }
+  
+  .form-textarea {
+    height: auto; /* Permite que crezca */
+    min-height: 80px; /* Altura mínima */
+    resize: vertical;
+  }
+  
+  .form-input:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  }
+  
+  select.form-input {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 10px 10px;
+    padding-right: 40px;
+  }
+  
+  /* Contenedor para los botones */
+  .form-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0; /* Separador */
+    display: flex;
+    justify-content: flex-end; /* Alinea botones a la derecha */
+    gap: 15px; /* Espacio entre botones */
+  }
+  
+  /* Estilo base para botones */
+  .button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  }
+  
+  /* Botón primario (Crear Clase) */
+  .primary-button {
+    background-color: #007bff; /* Azul */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+  }
+  
+  .primary-button:hover {
+    background-color: #0069d9;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+  
+  .primary-button:active {
+      background-color: #0056b3;
+      transform: scale(0.98);
+  }
+  
+  /* Botón secundario (Cancelar) */
+  .secondary-button {
+    background-color: #f8f9fa; /* Fondo claro */
+    color: #495057; /* Texto oscuro */
+    border: 1px solid #ced4da; /* Borde */
+  }
+  
+  .secondary-button:hover {
+    background-color: #e9ecef; /* Fondo un poco más oscuro en hover */
+    border-color: #adb5bd;
+  }
+  
+  .secondary-button:active {
+      background-color: #dee2e6;
+      transform: scale(0.98);
+  }
+
+  /* Estilo para el botón de regreso */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre icono y texto */
+  background-color: #f8f9fa; /* Fondo claro */
+  border: 1px solid #ced4da; /* Borde sutil */
+  color: #495057; /* Color de texto */
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  margin-bottom: 20px; /* Espacio debajo del botón */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}

@@ -8,7 +8,7 @@ async function authenticateUser(req, res, next) {
 
     // se verifica que se haya enviado el access token en el header del request
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader || !authHeader.startsWith("Bearer")) {
         res.status(401).json({message: "JWT no proporcionado"});
         return;
     }   
