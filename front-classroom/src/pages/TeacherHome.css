@@ -1,0 +1,224 @@
+/* src/pages/TeacherHome.css */
+
+/* Estilos para la página principal del maestro */
+.teacher-home-page {
+  padding: 30px 40px;
+  max-width: 1400px; /* Puede ser más ancho para la cuadrícula */
+  margin: 0 auto; /* Centra */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa; /* Fondo general */
+  min-height: 100vh; /* Altura mínima */
+}
+
+/* Contenedor para título y botón Crear Clase */
+.page-header {
+  display: flex;
+  justify-content: space-between; /* Título a la izq, botón a la der */
+  align-items: center;
+  margin-bottom: 30px; /* Espacio debajo del header */
+  flex-wrap: wrap; /* Por si no caben en una línea */
+  gap: 15px; /* Espacio si se envuelven */
+}
+
+/* Título de la página */
+.page-title {
+  font-size: 1.75em;
+  color: #3c4043; /* Color tipo Google */
+  font-weight: 500;
+  margin: 0; /* Quitamos margen si está en flex */
+}
+
+/* Botón Crear Clase */
+.create-class-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1a73e8; /* Azul Google */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.create-class-button:hover {
+  background-color: #1765cc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.create-class-button .button-icon {
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+/* Botón grande cuando no hay clases */
+.create-class-button.large {
+  padding: 15px 30px;
+  font-size: 1.1em;
+}
+.create-class-button.large .button-icon {
+    font-size: 1.2em;
+}
+
+
+/* Cuadrícula para las tarjetas de clase */
+.class-grid {
+  display: grid;
+  /* Columnas responsivas: Mínimo 280px, máximo 1fr (fracción del espacio) */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px; /* Espacio entre tarjetas */
+}
+
+/* Enlace que envuelve la tarjeta */
+.class-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: 8px; /* Redondeo en el enlace contenedor */
+  transition: box-shadow 0.28s cubic-bezier(0.4,0,0.2,1); /* Transición tipo Google */
+}
+
+.class-card-link:hover {
+ box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
+}
+
+/* La tarjeta de clase en sí */
+.class-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dadce0; /* Borde tipo Google */
+  display: flex;
+  flex-direction: column;
+  height: 300px; /* Altura fija */
+  position: relative;
+}
+
+/* Cabecera de la tarjeta */
+.card-header {
+  height: 100px;
+  padding: 16px;
+  position: relative;
+  color: #ffffff; /* Texto blanco */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Título de la clase en la tarjeta */
+.card-title {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Ajusta max-width si usas avatar */
+  /* max-width: calc(100% - 50px); */
+   max-width: 100%; /* Ocupa todo si no hay avatar */
+}
+.card-title-link {
+    color: inherit;
+    text-decoration: none;
+}
+.card-title-link:hover {
+    text-decoration: underline;
+}
+
+/* Texto del profesor/sección en la tarjeta */
+.card-teacher { /* Reutilizado para sección */
+  font-size: 0.85em;
+  font-weight: 400;
+  margin: 4px 0 0 0;
+  opacity: 0.9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Avatar (actualmente comentado en el JS, pero dejamos el estilo por si acaso) */
+.card-avatar {
+  position: absolute;
+  top: 55px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f0f0f0; /* Color por defecto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4em;
+  font-weight: 500;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Contenido principal de la tarjeta */
+.card-content {
+  flex-grow: 1; /* Ocupa el espacio restante */
+  padding: 16px 25px; /* Padding interno */
+}
+
+/* Párrafo de número de alumnos */
+.card-content .student-count {
+  color: #5f6368; /* Gris Google */
+  font-size: 0.9em;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Espacio icono-texto */
+}
+
+/* Pie de la tarjeta con acciones */
+.card-actions {
+  border-top: 1px solid #dadce0; /* Separador */
+  padding: 8px 8px;
+  display: flex;
+  justify-content: flex-end; /* Iconos a la derecha */
+  align-items: center;
+  gap: 8px; /* Espacio entre iconos */
+}
+
+/* Botones de icono en las acciones */
+.card-actions button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #5f6368; /* Color icono Google */
+  font-size: 1.3em; /* Tamaño icono */
+  border-radius: 50%; /* Área clickeable redonda */
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.card-actions button:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Fondo sutil en hover */
+}
+
+/* Mensaje y botón cuando no hay clases */
+.no-classes-container {
+ text-align: center;
+ margin-top: 40px;
+ padding: 40px;
+ background-color: #fff;
+ border: 1px solid #dadce0;
+ border-radius: 8px;
+}
+.no-classes {
+  color: #5f6368;
+  font-style: normal;
+  margin-bottom: 25px; /* Espacio antes del botón grande */
+}
+
+/* Estilo botón regreso (puede estar en index.css o aquí) */
+.back-button { display: inline-flex; align-items: center; gap: 8px; background-color: #f8f9fa; border: 1px solid #ced4da; color: #495057; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.95em; font-weight: 500; margin-bottom: 20px; transition: background-color 0.2s ease, border-color 0.2s ease; }
+.back-button:hover { background-color: #e9ecef; border-color: #adb5bd; }
