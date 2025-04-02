@@ -11,7 +11,7 @@
     },
     "accountServiceConfig": {
         "accessTokenSecret": "PAPOTA01",
-        "accessTokenExpirationSec": 300,
+        "accessTokenExpirationSec": 10000,
         "refreshTokenExpirationDays": 1,
         "passwordSaltWorkFactor": 12
     }

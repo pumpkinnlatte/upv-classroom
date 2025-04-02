@@ -14,12 +14,13 @@ function App() {
       <Routes>
         {/* Rutas de Login */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<LoginPage />} /> 
+        <Route path="/" element={<LoginPage />} /> z
 
         {/* Rutas de Alumno */}
         <Route path="/student/home" element={<StudentHome />} />
         <Route path="/student/class/:id" element={<StudentClass />} />
   
+         {/* Rutas de Profesor */}
         <Route path="/teacher/home" element={<TeacherHome />} />
         <Route path="/teacher/class/:id" element={<TeacherClass />} />
         <Route path="/teacher/create-class" element={<CreateClassPage />} />

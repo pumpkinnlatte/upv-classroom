@@ -19,8 +19,7 @@ class AccountService {
     async validarCredenciales(identifier, password) {
         const sql = "SELECT usuario_id, password FROM usuarios WHERE matricula = ? or email = ?";
         const [[user]] = await db.query(sql, [identifier, identifier]);
-        console.log("pass01: ", password, "    pass02: ", user.password);
-
+   
         if(password === user.password) {
             return user.usuario_id;
         }
@@ -39,7 +38,7 @@ class AccountService {
         if (!userData) return null;
         return jwt.sign({
             userId: userData.usuario_id,
-            matricula: userData.matricula,
+            tipoUsuario: userData.tipoUsuario,
             exp: Math.floor(DateTime.now().plus({ seconds: this.accessTokenExpirationSec }).toSeconds())
         }, this.accessTokenSecret);
     }

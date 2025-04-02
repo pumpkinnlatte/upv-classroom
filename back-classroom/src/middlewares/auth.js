@@ -6,6 +6,8 @@ const accountService = new AccountService();
  */
 async function authenticateUser(req, res, next) {
 
+    console.log("Intento de autorizar usuario: ");
+
     // se verifica que se haya enviado el access token en el header del request
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer")) {
@@ -23,7 +25,7 @@ async function authenticateUser(req, res, next) {
 
     // para tener en los siguientes endpoints los datos del usuario
     req.userData = userData;  
-    
+
     next();  // Exec del siguiente middleware
 }
 

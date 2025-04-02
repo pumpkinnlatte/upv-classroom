@@ -1,63 +1,76 @@
 // src/pages/LoginPage.js - SIMPLIFICADO
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+
 import './LoginPage.css';
-// Quitamos importación de iconos si ya no los usamos
-// import { FaUser, FaLock } from 'react-icons/fa';
+const api_route = require("../config.json").api_route; //Importar Ruta de la API
+
 
 function LoginPage() {
-  // Ya no necesitamos estado para 'role' ni 'teacherKey'
+
   const navigate = useNavigate();
 
-  // Estados solo para usuario y contraseña
-  const [username, setUsername] = useState(''); // Puede ser email o matrícula
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // Estado para mensaje de error
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    error: ""
+  });
 
-  const handleLogin = async (event) => {
-     event.preventDefault();
-     setError(''); // Limpia errores previos
+  const [error, setError] = useState(""); // Estado para mensaje de error
 
-    // --- LÓGICA DE LOGIN (Simulación Mejorada) ---
-    // Enviar 'username' y 'password' a tu API backend (POST /api/auth/login)
-    console.log("Enviando credenciales:", { username, password });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    // Simulación de llamada a API
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(''); // Limpia errores previos
+
     try {
-        // const response = await fetch('/api/auth/login', { method: 'POST', ... });
-        // if (!response.ok) { throw new Error('Usuario o contraseña inválidos'); }
-        // const userData = await response.json(); // Espera { success: true, role: 'maestro' | 'alumno', token: '...' }
+      const response = await fetch(`${api_route}/account/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          username:formData.username,
+          password: formData.password 
+       }),
+      });
 
-        // --- SIMULACIÓN ---
-        let simulatedRole = null;
-        if (username === 'profesor@upv.edu' && password === 'password') {
-            simulatedRole = 'teacher';
-        } else if (username === 'alumno@upv.edu' && password === 'password') {
-            simulatedRole = 'student';
-        }
-        // --- FIN SIMULACIÓN ---
+      const data = await response.json();
 
-        if (simulatedRole) {
-           console.log("Login exitoso como:", simulatedRole);
-           // Aquí guardarías el token de autenticación (ej: en localStorage)
-           // localStorage.setItem('authToken', userData.token);
+      if (response.ok) {
 
-           // Redirige según el ROL devuelto por la API (o la simulación)
-           if (simulatedRole === 'teacher') {
-             navigate("/teacher/home");
-           } else { // Asume alumno si no es maestro
-             navigate("/student/home");
-           }
+        setError("Usuario ha iniciado sesion con éxito.");
+        setFormData({ username: "", password: ""});
+
+        //Guardar en el localStorage
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
+
+        const decoded = jwtDecode(data.accessToken);
+
+        if (decoded.tipoUsuario === "profesor") {
+            navigate("/teacher/home");
         } else {
-            // Simulación de error de credenciales
-            throw new Error('Usuario o contraseña inválidos.');
+            navigate("/student/home");
         }
 
-    } catch (err) {
-        console.error("Error en login:", err);
-        setError(err.message || 'Ocurrió un error al iniciar sesión.'); // Muestra mensaje de error
+      } else {
+        setError(data.error || "Error en el inicio de sesión.");
+        console.log(data);
+      }
+
+
+    } catch (error) {
+      setError("Error al conectar con el servidor");
     }
-    // --- FIN LÓGICA DE LOGIN ---
+    
   };
 
   // Placeholder para contraseña olvidada
@@ -77,11 +90,12 @@ function LoginPage() {
             <label htmlFor="username">Email o Matrícula:</label>
             <input
               id="username"
+              name="username"
               type="text"
               placeholder="Ingrese su email o matrícula"
               className="form-input" // Clase base
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={formData.username}
+              onChange={handleChange}
               required
             />
           </div>
@@ -92,16 +106,15 @@ function LoginPage() {
             <label htmlFor="password">Contraseña:</label>
             <input
               id="password"
+              name='password'
               type="password"
               placeholder="Ingrese su contraseña"
               className="form-input" // Clase base
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               required
             />
           </div>
-
-          {/* --- YA NO HAY SELECTOR DE ROL NI CAMPO DE CLAVE --- */}
 
           {/* Mensaje de Error */}
           {error && (
@@ -111,7 +124,7 @@ function LoginPage() {
 
           {/* Enlace Olvidé Contraseña */}
           <div className="login-links-container">
-             <a href="#" onClick={handleForgotPassword} className="forgot-password-link">
+             <a href="/" onClick={handleForgotPassword} className="forgot-password-link">
                ¿Olvidaste tu contraseña?
              </a>
              {/* No hay enlace de registro */}

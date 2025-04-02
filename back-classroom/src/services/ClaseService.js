@@ -2,11 +2,16 @@ const db = require("../data-access/db"); //Acceso a la base de datos
 
 class ClaseService {
 
-    async crearClase({ nombre, descripcion, codigoGrupo, carrera, cuatrimestre, profesorId }) {
+    async crearClase(claseData) {
         const sql = "INSERT INTO clases (nombre_clase, descripcion_clase, codigo_grupo, carrera, cuatrimestre, profesor_id) VALUES (?, ?, ?, ?, ?, ?)";
-        const result = await db.query(sql, [nombre, descripcion, codigoGrupo, carrera, cuatrimestre, profesorId]);
+        const result = await db.query(sql, [claseData.nombre, claseData.descripcion, claseData.codigoGrupo, claseData.carrera, claseData.cuatrimestre, claseData.profesorId]);
+        return {message: "Clase creada con éxito", claseId: result.insertId, claseNombre: claseData.nombre};
+    }
 
-        return { id: result.insertId, nombre, descripcion, codigoGrupo, carrera, cuatrimestre };
+    async agregarAlumno(claseId, usuarioId){
+        const sql = "INSERT INTO alumnos_clases (clase_id, usuario_id) VALUES (?, ?)";
+        const result = await db.query(sql, [claseId, usuarioId]);
+        return {message: "Alumno agregado con éxito", usuarioId: usuarioId, claseId: claseId};
     }
 
     async getClasesByAlumno(alumnoId) {  //Obtener Clases asociadas a un alumno
@@ -15,16 +20,18 @@ class ClaseService {
             FROM clases c
             JOIN alumnos_clases ac ON c.clase_id = ac.clase_id
             WHERE ac.usuario_id = ?`;
-        return await db.query(sql, [alumnoId]);
+        const [rows] = await db.query(sql, [alumnoId]); // Extrae solo las filas
+        return rows; // Devuelve solo las filas
     }
 
     async getClasesByProfesor(profesorID) {  //Obtener Clases asociadas a un profesor
         const sql = `
             SELECT clase_id, nombre_clase, descripcion_clase, codigo_grupo, carrera, cuatrimestre
             FROM clases WHERE profesor_id = ?`;
-        return await db.query(sql, [profesorID]);
+        const [rows] = await db.query(sql, [profesorID]); // Extrae solo las filas
+        return rows; // Devuelve solo las filas
     }
 
 }
 
-module.exports = new ClaseService();
+module.exports = new ClaseService;

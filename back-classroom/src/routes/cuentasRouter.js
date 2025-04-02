@@ -53,12 +53,11 @@ router.post("/refresh-token", async (req, res) => {
     res.json({accessToken});
 });
 
-
-
 // #03 Endpoint para obtener la información del usuario
 router.get("/user-info", auth, (req, res) => {
     res.json(req.userData);
 });
+
 
 module.exports = router;
 
