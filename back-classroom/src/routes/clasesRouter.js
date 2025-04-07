@@ -116,13 +116,13 @@ router.post("/create-topic", auth, async (req, res) => {
     try{
         const user = req.userData;  // Usuario autenticado desde el token
 
-        const Temadata = req.body;  // Datos del tema
+        const temaData = req.body;  // Datos del tema
 
         if (user.tipoUsuario !== "profesor") {
             return res.status(403).json({ message: "Un alumno no puede crear un tema en la clase" });
         } 
 
-        const result = await claseService.crearTema(data.claseId, data);
+        const result = await claseService.crearTema(temaData.claseId, temaData);
         res.status(201).json(result);
 
     } catch (error){

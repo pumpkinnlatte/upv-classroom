@@ -48,7 +48,7 @@ class ClaseService {
 
     async crearTema(claseId, temaData) {
         const sql = "INSERT INTO temas (nombre_tema, descripcion_tema, clase_id) VALUES (?, ?, ?)";
-        const result = await db.query(sql, [claseId, temaData.nombreTema, temaData.descripcionTema]);
+        const result = await db.query(sql, [temaData.nombreTema, temaData.descripcionTema, claseId]);
         return {message: "Tema creado con éxito", temaId: result.insertId, temaNombre: temaData.nombreTema, claseId: claseId};
     }
 
