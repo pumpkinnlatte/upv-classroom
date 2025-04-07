@@ -1,6 +1,6 @@
 const db = require("../data-access/db"); //Acceso a la base de datos
 
-class AvisoService {
+class PublicacionService {
 
     async agregarAviso(avisoData) {
         const sql = `INSERT INTO avisos (clase_id, titulo_aviso, descripcion_aviso, fecha_publicacion) VALUES (?, ?, ?, ?)`;
@@ -20,4 +20,4 @@ class AvisoService {
     }
 }
 
-module.exports = new AvisoService;
+module.exports = new PublicacionService;

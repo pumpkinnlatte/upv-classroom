@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middlewares/auth");  // Middleware de autenticación
 
-const avisoService = require("../services/AvisoServices");  // Instancia del servicio de clases
+const publicacionService = require("../services/PublicacionServices");  // Instancia del servicio de clases
 
 // #01 Endpoint para crear un nuevo aviso (SOLO MAESTROS)
 router.post("/create", auth, async (req, res) => {
@@ -19,7 +19,7 @@ router.post("/create", auth, async (req, res) => {
         const avisoData = req.body;
         avisoData.fechaPublicacion = avisoData.fechaPublicacion || new Date(); // Asigna la fecha actual si no se proporciona
 
-        const result = await avisoService.agregarAviso(avisoData);
+        const result = await publicacionService.agregarAviso(avisoData);
         res.status(201).json(result);
 
     } catch (error) {
@@ -35,7 +35,7 @@ router.post("/get-avisos", auth, async (req, res) => {
         const user = req.userData;  // Usuario autenticado desde el token
         let avisos;
 
-        avisos = await avisoService.getAvisosPorClase(req.body.claseId);
+        avisos = await publicacionService.getAvisosPorClase(req.body.claseId);
         res.json(avisos);
 
     } catch (error) {

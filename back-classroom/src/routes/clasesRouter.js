@@ -93,4 +93,42 @@ router.post("/add-alumno", auth, async (req, res) => {
 
 });
 
+
+// #05 Endpoint para obtener todos los alumnos asociados a una clase
+router.post("/get-alumnos", auth, async (req, res) => {
+    try{
+        const user = req.userData;  // Usuario autenticado desde el token
+
+        const data = req.body;  // Datos de la clase
+
+        const result = await claseService.getAlumnosByClase(data.claseId);
+        res.status(201).json(result);
+
+    } catch (error){
+        res.status(500).json({ message: "Error al obtener alumnos inscritos", error: error.message });
+    }
+
+});
+
+
+// #06 Endpoint para crear un tema en una clase (SOLO PROFESORES)
+router.post("/create-topic", auth, async (req, res) => {
+    try{
+        const user = req.userData;  // Usuario autenticado desde el token
+
+        const Temadata = req.body;  // Datos del tema
+
+        if (user.tipoUsuario !== "profesor") {
+            return res.status(403).json({ message: "Un alumno no puede crear un tema en la clase" });
+        } 
+
+        const result = await claseService.crearTema(data.claseId, data);
+        res.status(201).json(result);
+
+    } catch (error){
+        res.status(500).json({ message: "Error al obtener alumnos inscritos", error: error.message });
+    }
+
+});
+
 module.exports = router;
