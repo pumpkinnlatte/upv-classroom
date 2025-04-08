@@ -6,7 +6,7 @@ const api_route = require("../../config.json").api_route;
 export const TasksSection = ({ classId, isTeacher }) => {
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchTasks();
   }, [classId]);
 
@@ -28,7 +28,7 @@ export const TasksSection = ({ classId, isTeacher }) => {
     } catch (error) {
       console.error('Error al cargar las tareas:', error);
     }
-  };
+  };*/
 
   const handleTaskCreated = (newTask) => {
     setTasks(prevTasks => [newTask, ...prevTasks]);

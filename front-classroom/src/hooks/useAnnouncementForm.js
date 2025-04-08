@@ -1,5 +1,5 @@
 import { useState } from 'react';
-const api_route = require("../config.json").api_route;
+import { sendAnnouncementData, sendFileData } from '../services/apiSend';
 
 export const useAnnouncementForm = (classId, onAnnouncementCreated) => {
   const [title, setTitle] = useState('');
@@ -30,50 +30,45 @@ export const useAnnouncementForm = (classId, onAnnouncementCreated) => {
     }
 
     try {
-      const avisoResponse = await fetch(`${api_route}/announcements/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify({
-          clase_id: classId,
-          titulo: title,
-          descripcion: text
-        }),
-      });
 
-      if (!avisoResponse.ok) throw new Error('Error al crear el aviso');
-      const avisoData = await avisoResponse.json();
-
-      if (file) {
-        const archivoFormData = new FormData();
-        archivoFormData.append('file', file);
-        archivoFormData.append('claseId', classId);
-        archivoFormData.append('publicacionId', avisoData.avisoId);
-        archivoFormData.append('tipoPublicacion', 'aviso');
-
-        const archivoResponse = await fetch(`${api_route}/archivos/subir-archivo`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-          body: archivoFormData,
-        });
-
-        if (!archivoResponse.ok) {
-          console.error('Error al subir el archivo');
+        //Se serializan los datos del anuncio
+        const avisoData = {
+            claseId: classId,
+            titulo: title,
+            descripcion: text,
+            fechaPublicacion: "",
         }
-      }
 
-      const newAnnouncement = {
-        aviso_id: avisoData.avisoId,
-        titulo_aviso: title,
-        descripcion_aviso: text,
-        fecha_publicacion: new Date().toISOString(),
-      };
+        console.log("Datos del aviso:", avisoData);
 
-      onAnnouncementCreated(newAnnouncement);
+        //Se envian los datos del anuncio al servidor
+        const newAvisoData = await sendAnnouncementData(avisoData);
+
+        //Se verifica si el anuncio fue creado correctamente
+        if (!newAvisoData) {
+            alert("Error al crear el aviso.");
+            return;
+        }
+
+        console.log("Nuevo aviso creado:", newAvisoData);
+
+        if (file) {
+
+            console.log("aviso idd arrchiiivo", newAvisoData.avisoId);
+            
+            // Create FormData to send the file
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('publicacionId', newAvisoData.avisoId); 
+            formData.append('tipoPublicacion', 'aviso');
+            
+
+            const fileResponse = await sendFileData(formData);
+            console.log("File upload response:", fileResponse);
+        }
+        
+
+      onAnnouncementCreated(newAvisoData);
       
       // Reset form
       setTitle('');

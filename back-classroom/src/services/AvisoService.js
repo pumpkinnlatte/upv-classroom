@@ -4,8 +4,16 @@ class AvisoService {
 
     async agregarAviso(avisoData) {
         const sql = `INSERT INTO avisos (clase_id, titulo_aviso, descripcion_aviso, fecha_publicacion) VALUES (?, ?, ?, ?)`;
-        const result = await db.query(sql, [avisoData.clase_id, avisoData.titulo, avisoData.descripcion, avisoData.fechaPublicacion,]);
-        return {message: "Aviso creado con éxito", avisoId: result.insertId, tituloAviso: avisoData.titulo};
+        const [result] = await db.query(sql, [avisoData.clase_id, avisoData.titulo, avisoData.descripcion, avisoData.fechaPublicacion]);
+        
+        console.log("Resultado completo de la inserción:", result);
+        console.log("ID del aviso insertado:", result.insertId);
+        
+        return {
+            message: "Aviso creado con éxito", 
+            avisoId: result.insertId, 
+            titulo: avisoData.titulo
+        };
     }
 
     async getAvisosPorClase(claseId) {
