@@ -34,12 +34,18 @@ router.post("/get-classes", auth, async (req, res) => {
         const user = req.userData;  // Usuario autenticado desde el token
         let clases;
 
-        if (user.tipoUsuario === "profesor") {
-            clases = await claseService.getClasesByProfesor(user.usuario_id);
-        } else if (user.tipoUsuario === "alumno") {
-            clases = await claseService.getClasesByAlumno(user.usuario_id);
+        console.log("claseId: ", req.body.claseId);
+
+        if (!req.body.claseId) {
+            if (user.tipoUsuario === "profesor") {
+                clases = await claseService.getClasesByProfesor(user.usuario_id);
+            } else if (user.tipoUsuario === "alumno") {
+                clases = await claseService.getClasesByAlumno(user.usuario_id);
+            } else {
+                return res.status(403).json({ message: "Rol no válido" });
+            }
         } else {
-            return res.status(403).json({ message: "Rol no válido" });
+            clases = await claseService.getClaseById(req.body.claseId);
         }
 
         res.json(clases);

@@ -3,6 +3,7 @@ import React from 'react'; // Añade import si no estaba
 import { Link } from "react-router-dom";
 import './StudentHome.css';
 import { FaRegFolder, FaUserGraduate } from 'react-icons/fa';
+const api_route = require("../config.json").api_route; // Importar la ruta base de la API
 
 const predefinedColors = ['#1a73e8', '#e84118', '#44bd32', '#fbc531', '#9c88ff', '#00a8ff', '#e84393'];
 function getCardColor(classId) { const index = classId % predefinedColors.length; return predefinedColors[index]; }
@@ -15,7 +16,31 @@ function StudentHome() {
   const [joinMessage, setJoinMessage] = React.useState({ type: '', text: '' });
   const [isJoining, setIsJoining] = React.useState(false);
 
-  const handleJoinClass = async (event) => { /* ... lógica simulación ... */ };
+  const handleJoinClass = async (event) => {
+    event.preventDefault();
+    setIsJoining(true);
+    try {
+      const response = await fetch(`${api_route}/class/join-by-code`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        },
+        body: JSON.stringify({ claseId: joinCode }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setJoinMessage({ type: 'success', text: 'Te has unido a la clase exitosamente.' });
+        setJoinCode("");
+      } else {
+        setJoinMessage({ type: 'error', text: result.message || 'Error al unirse a la clase.' });
+      }
+    } catch (error) {
+      setJoinMessage({ type: 'error', text: 'Error de red al intentar unirse a la clase.' });
+    } finally {
+      setIsJoining(false);
+    }
+  };
   // --- Fin sección Unirse a Clase ---
 
   return (

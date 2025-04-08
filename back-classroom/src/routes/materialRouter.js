@@ -30,12 +30,12 @@ router.post("/create", auth, async (req, res) => {
 
 
 // #02 Endpoint para obtener los materiales asociados a una clase (Alumno o profesor)
-router.post("/get-tareas", auth, async (req, res) => {
+router.post("/get-materiales", auth, async (req, res) => {
     try {
         const user = req.userData;  // Usuario autenticado desde el token
         let avisos;
 
-        avisos = await materialService.getMaterialesPorTema(req.body.claseId);
+        avisos = await materialService.getMaterialesPorClase(req.body.claseId);
         res.json(avisos);
 
     } catch (error) {

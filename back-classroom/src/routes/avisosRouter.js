@@ -35,7 +35,7 @@ router.post("/get-avisos", auth, async (req, res) => {
         const user = req.userData;  // Usuario autenticado desde el token
         let avisos;
 
-        avisos = await publicacionService.getAvisosPorClase(req.body.claseId);
+        avisos = await avisoService.getAvisosPorClase(req.body.claseId);
         res.json(avisos);
 
     } catch (error) {

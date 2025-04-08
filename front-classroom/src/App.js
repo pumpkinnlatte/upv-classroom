@@ -18,11 +18,11 @@ function App() {
 
         {/* Rutas de Alumno */}
         <Route path="/student/home" element={<StudentHome />} />
-        <Route path="/student/class/:id" element={<StudentClass />} />
+        <Route path="/student/c/:id" element={<StudentClass />} />
   
          {/* Rutas de Profesor */}
         <Route path="/teacher/home" element={<TeacherHome />} />
-        <Route path="/teacher/class/:id" element={<TeacherClass />} />
+        <Route path="/teacher/c/:id" element={<TeacherClass />} />
         <Route path="/teacher/create-class" element={<CreateClassPage />} />
         {/* ------------------------------------- */}
       </Routes>

@@ -9,14 +9,14 @@ class TareasService {
         return {message: "Material creado con éxito", tareaId: result.insertId, tituloMaterial: materialData.tituloMaterial, fechaPublicacion: materialData.fechaPublicacion};
     }
 
-    async getMaterialesPorTema(temaId) {
+    async getMaterialesPorClase(claseId) {
         const sql = `
             SELECT material_id, titulo_material, descripcion_material, fecha_publicacion, tema_id
             FROM materiales
-            WHERE tema_id = ?
+            WHERE clase_id = ?
             ORDER BY fecha_publicacion DESC
         `;
-        const [rows] = await db.query(sql, [temaId]); // Extrae solo las filas
+        const [rows] = await db.query(sql, [claseId]); // Extrae solo las filas
         return rows; // Devuelve los materiales asociadas a la clase
     }
 

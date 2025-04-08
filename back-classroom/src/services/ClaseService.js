@@ -28,6 +28,14 @@ class ClaseService {
         return rows; // Devuelve solo las filas
     }
 
+    async getClaseById(claseId) {  //Obtener una clase por su ID
+        const sql = `
+            SELECT clase_id, nombre_clase, descripcion_clase, codigo_grupo, carrera, cuatrimestre
+            FROM clases WHERE clase_id = ?`;
+        const [rows] = await db.query(sql, [claseId]); // Extrae solo las filas
+        return rows[0]; // Devuelve solo la primera fila
+    }
+
     //ALUMNOS
 
     async agregarAlumno(claseId, usuarioId){

@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 
 import './LoginPage.css';
-const api_route = require("../config.json").api_route; //Importar Ruta de la API
-
+const api_route = require("../config.json").api_route; // Importar la ruta base de la API
 
 function LoginPage() {
 
@@ -37,7 +36,7 @@ function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          username:formData.username,
+          username: formData.username,
           password: formData.password 
        }),
       });
