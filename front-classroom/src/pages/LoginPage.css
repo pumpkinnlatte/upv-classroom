@@ -1,44 +1,64 @@
-/* src/pages/LoginPage.css - SIMPLIFICADO */
-
-/* Estilo base y fondo (sin cambios) */
-.login-page { display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 20px; }
-
-/* Contenedor del formulario (sin cambios) */
-.login-container { background-color: #ffffff; padding: 40px 50px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); width: 100%; max-width: 420px; /* Ajustado */ text-align: center; border: 1px solid rgba(255, 255, 255, 0.2); }
-
-/* Título (sin cambios) */
-.login-container h2 { margin-bottom: 30px; color: #2c3e50; font-weight: 600; font-size: 1.8em; }
-
-/* Grupo de Formulario (sin cambios) */
-.form-group { margin-bottom: 20px; text-align: left; }
-
-/* --- SE ELIMINAN ESTILOS PARA icon-input-group, input-icon --- */
-
-/* Inputs (ahora sin padding extra para icono) */
-.form-input {
-  width: 100%;
-  padding: 12px 15px; /* Padding normal */
-  border: 1px solid #bdc3c7;
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  height: 48px;
+/* Base Layout */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    padding: 20px;
 }
-/* Ya no se necesita .with-icon */
 
-/* Estilos de Focus (sin cambios) */
-.form-input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); }
+/* Container */
+.login-container {
+    background-color: #ffffff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-/* Placeholder (sin cambios) */
-.form-input::placeholder { color: #95a5a6; }
+.login-container h2 {
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.8em;
+}
 
-/* --- SE ELIMINAN ESTILOS PARA EL SELECT (si los había específicos) --- */
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
 
-/* Mensaje de Error */
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    height: 48px;
+}
+
+.form-input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-input::placeholder {
+    color: #95a5a6;
+}
+
+/* Error Message */
 .error-message {
-    color: #dc3545; /* Rojo */
-    background-color: #f8d7da; /* Fondo rojo claro */
+    color: #dc3545;
+    background-color: #f8d7da;
     border: 1px solid #f5c6cb;
     padding: 10px 15px;
     border-radius: 6px;
@@ -47,23 +67,70 @@
     text-align: center;
 }
 
-
-/* Contenedor de enlaces (Solo "Olvidé contraseña") */
+/* Links */
 .login-links-container {
-  text-align: right; /* Alinea a la derecha */
-  margin-top: -10px; /* Reduce espacio si solo hay un link */
-  margin-bottom: 25px;
-  font-size: 0.9em;
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 25px;
+    font-size: 0.9em;
 }
-.forgot-password-link { color: #007bff; text-decoration: none; transition: color 0.2s ease; }
-.forgot-password-link:hover { color: #0056b3; text-decoration: underline; }
 
+.forgot-password-link {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
 
-/* Botón de Login (sin cambios) */
-.login-button { width: 100%; padding: 14px; background-image: linear-gradient(to right, #3498db, #2980b9); color: white; border: none; border-radius: 6px; font-size: 1.15rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin-top: 15px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); }
-.login-button:hover { background-image: linear-gradient(to right, #2980b9, #3498db); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5); transform: translateY(-2px); }
-.login-button:active { transform: translateY(0); box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); }
+.forgot-password-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
 
-/* Estilo botón regreso (si no está en index.css) */
-.back-button { display: inline-flex; align-items: center; gap: 8px; background-color: #f8f9fa; border: 1px solid #ced4da; color: #495057; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.95em; font-weight: 500; margin-bottom: 20px; transition: background-color 0.2s ease, border-color 0.2s ease; }
-.back-button:hover { background-color: #e9ecef; border-color: #adb5bd; }
+/* Buttons */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-image: linear-gradient(to right, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.login-button:hover {
+    background-image: linear-gradient(to right, #2980b9, #3498db);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+    transform: translateY(-2px);
+}
+
+.login-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #495057;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}

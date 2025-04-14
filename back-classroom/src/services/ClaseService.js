@@ -10,16 +10,17 @@ class ClaseService {
         return {message: "Clase creada con éxito", claseId: result.insertId, claseNombre: claseData.nombre};
     }
 
-    async getClasesByAlumno(alumnoId) {  //Obtener Clases asociadas a un alumno
+    async getClasesByAlumno(alumnoId) {
+        //Obtener Clases asociadas a un alumno con el nombre del profesor
         const sql = `
-            SELECT c.clase_id, c.nombre_clase, c.descripcion_clase, c.codigo_grupo, c.carrera, c.cuatrimestre
-            FROM clases c
-            JOIN alumnos_clases ac ON c.clase_id = ac.clase_id
-            WHERE ac.usuario_id = ?`;
+          SELECT c.clase_id, c.nombre_clase, c.descripcion_clase, c.codigo_grupo, c.carrera, c.cuatrimestre, c.profesor_id, u.nombre AS nombre_profesor
+          FROM clases c
+          JOIN alumnos_clases ac ON c.clase_id = ac.clase_id
+          JOIN usuarios u ON c.profesor_id = u.usuario_id
+          WHERE ac.usuario_id = ?`;
         const [rows] = await db.query(sql, [alumnoId]); // Extrae solo las filas
-        return rows; // Devuelve solo las filas
-    }
-
+        return rows; // Devuelve las filas con el nombre del profesor
+      }
     async getClasesByProfesor(profesorID) {  //Obtener Clases asociadas a un profesor
         const sql = `
             SELECT clase_id, nombre_clase, descripcion_clase, codigo_grupo, carrera, cuatrimestre
@@ -58,6 +59,22 @@ class ClaseService {
         const sql = "INSERT INTO temas (nombre_tema, descripcion_tema, clase_id) VALUES (?, ?, ?)";
         const result = await db.query(sql, [temaData.nombreTema, temaData.descripcionTema, claseId]);
         return {message: "Tema creado con éxito", temaId: result.insertId, temaNombre: temaData.nombreTema, claseId: claseId};
+    }
+
+    async joinByCode(classCode, usuarioId) {
+        //Unirse a una clase por su código
+        const sql = `
+            INSERT INTO alumnos_clases (usuario_id, clase_id)
+            SELECT ?, clase_id FROM clases WHERE codigo_grupo = ?`;
+        const result = await db.query(sql, [usuarioId, classCode]);
+
+        console.log(result); // Para depuración
+
+        if (result.affectedRows === 0) {
+            return {message: "Código de clase inválido"};
+        } else {
+            return {message: "Clase unida con éxito", codigo: classCode};
+        }
     }
 
 }

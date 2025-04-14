@@ -35,6 +35,17 @@ export const getTasks = async (classId) => {
   return response.json();
 };
 
+export const getTaskById = async (taskId) => {
+  const response = await fetch(`${API_BASE_URL}/tareas/get-tarea-by-id`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ tareaId: taskId })
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || 'Failed to fetch task');
+  return data;
+};
+
 export const getMaterials = async (classId) => {
   const response = await fetch(`${API_BASE_URL}/materiales/get-materiales`, {
     method: 'POST',
@@ -52,5 +63,14 @@ export const getStudents = async (classId) => {
     body: JSON.stringify({ claseId: classId })
   });
   if (!response.ok) throw new Error('Failed to fetch students');
+  return response.json();
+};
+
+export const getClassByUser = async () => {
+  const response = await fetch(`${API_BASE_URL}/class/get-classes`, {
+    method: 'POST',
+    headers: getHeaders()
+  });
+  if (!response.ok) throw new Error('Error al obtener las clases');
   return response.json();
 };

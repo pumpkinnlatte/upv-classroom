@@ -1,91 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaPaperclip, FaTrashAlt, FaPlusCircle } from 'react-icons/fa';
-const api_route = require("../../config.json").api_route;
+import { useMaterialForm } from '../../hooks/useMaterialForm';
 
 export const MaterialForm = ({ classId, onMaterialCreated }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState('');
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      setFileName(selectedFile.name);
-    }
-  };
-
-  const handleRemoveFile = () => {
-    setFile(null);
-    setFileName('');
-    const fileInput = document.getElementById('materialAttachmentFile');
-    if (fileInput) fileInput.value = '';
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!title.trim() || !description.trim()) {
-      alert("Por favor, completa el título y la descripción del material.");
-      return;
-    }
-
-    try {
-      const materialResponse = await fetch(`${api_route}/materiales/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify({
-          claseId: classId,
-          tituloMaterial: title,
-          descripcionMaterial: description
-        }),
-      });
-
-      if (!materialResponse.ok) throw new Error('Error al crear el material');
-      const materialData = await materialResponse.json();
-
-      if (file) {
-        const archivoFormData = new FormData();
-        archivoFormData.append('file', file);
-        archivoFormData.append('claseId', classId);
-        archivoFormData.append('publicacionId', materialData.materialId);
-        archivoFormData.append('tipoPublicacion', 'material');
-
-        const archivoResponse = await fetch(`${api_route}/archivos/subir-archivo`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-          body: archivoFormData,
-        });
-
-        if (!archivoResponse.ok) {
-          console.error('Error al subir el archivo');
-        }
-      }
-
-      const newMaterial = {
-        material_id: materialData.materialId,
-        titulo_material: title,
-        descripcion_material: description,
-        fecha_publicacion: new Date().toISOString()
-      };
-
-      onMaterialCreated(newMaterial);
-      
-      // Reset form
-      setTitle('');
-      setDescription('');
-      handleRemoveFile();
-
-    } catch (error) {
-      console.error("Error al crear el material:", error);
-      alert("Error al crear el material.");
-    }
-  };
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    file,
+    fileName,
+    handleFileChange,
+    handleRemoveFile,
+    handleSubmit
+  } = useMaterialForm(classId, onMaterialCreated);
 
   return (
     <section className="add-material-section card-style">

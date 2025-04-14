@@ -1,0 +1,50 @@
+.section {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e0e0e0;
+}
+
+.title {
+  margin-top: 0;
+  font-size: 1.3em;
+  color: #495057;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.95em;
+}
+
+.formInput {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d2d6dc;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #fdfdff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 48px;
+}
+
+.formTextarea {
+  composes: formInput;
+  height: auto;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.dateInput {
+  composes: formInput;
+  width: 100%;
+}

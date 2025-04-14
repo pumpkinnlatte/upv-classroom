@@ -1,32 +1,56 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// Importa tus otros componentes de página
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Navigation from './components/Navigation/Navigation';
 import LoginPage from './pages/LoginPage';
-import StudentHome from './pages/StudentHome';
-import StudentClass from './pages/StudentClass';
-import TeacherHome from './pages/TeacherHome';
-import TeacherClass from './pages/TeacherClass';
-import CreateClassPage from './pages/CreateClassPage'; // <-- Importante importar
+import HomePage from './pages/HomePage';
+import ClassPage from './pages/ClassPage';
+import TeacherCreateClass from './pages/TeacherCreateClass';
+import './App.css';
+
+function PrivateRoute({ children }) {
+  const token = localStorage.getItem('accessToken');
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+}
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Rutas de Login */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<LoginPage />} /> z
-
-        {/* Rutas de Alumno */}
-        <Route path="/student/home" element={<StudentHome />} />
-        <Route path="/student/c/:id" element={<StudentClass />} />
-  
-         {/* Rutas de Profesor */}
-        <Route path="/teacher/home" element={<TeacherHome />} />
-        <Route path="/teacher/c/:id" element={<TeacherClass />} />
-        <Route path="/teacher/create-class" element={<CreateClassPage />} />
-        {/* ------------------------------------- */}
-      </Routes>
-    </Router>
+    <BrowserRouter>
+      <div className="app">
+        <Navigation />
+        <div className="content">
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route 
+              path="/" 
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              } 
+            />
+            <Route
+              path="/c/:id"
+              element={
+                <PrivateRoute>
+                  <ClassPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/teacher/create-class"
+              element={
+                <PrivateRoute>
+                  <TeacherCreateClass />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

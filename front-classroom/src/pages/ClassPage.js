@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaBullhorn, FaTasks, FaFolderOpen, FaUsers, FaArrowLeft } from 'react-icons/fa';
+import { jwtDecode } from 'jwt-decode';
 import { useClassData } from '../hooks/useClassData';
 import { AnnouncementForm } from '../components/Forms/AnnouncementForm';
 import { AnnouncementsList } from '../components/Lists/AnnouncementsList';
@@ -9,12 +10,21 @@ import { TaskList } from '../components/Lists/TaskList';
 import { MaterialForm } from '../components/Forms/MaterialForm';
 import { MaterialList } from '../components/Lists/MaterialList';
 import { StudentList } from '../components/Lists/StudentList';
-import './TeacherClass.css';
+import './ClassPage.css';
 
-function TeacherClass() {
+function ClassPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('avisos');
+  const [userRole, setUserRole] = useState('student');
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      const decoded = jwtDecode(token);
+      setUserRole(decoded.tipoUsuario === 'profesor' ? 'teacher' : 'student');
+    }
+  }, []);
 
   const {
     loading,
@@ -39,14 +49,16 @@ function TeacherClass() {
     setAnnouncements(prev => [newAnnouncement, ...prev]);
   };
 
+  const isTeacher = userRole === 'teacher';
+
   return (
-    <div className="teacher-class-page">
+    <div className="class-page">
       <button onClick={() => navigate(-1)} className="back-button">
         <FaArrowLeft /> Regresar
       </button>
 
       <header className="class-header">
-        <h2>{className} <span className="class-id-display"></span></h2>
+        <h2>{className}</h2>
       </header>
 
       <nav className="class-tabs">
@@ -62,48 +74,66 @@ function TeacherClass() {
         >
           <FaTasks /> Tareas
         </button>
-        <button 
-          onClick={() => setActiveTab('materiales')} 
-          className={`tab-button ${activeTab === 'materiales' ? 'active' : ''}`}
-        >
-          <FaFolderOpen /> Materiales
-        </button>
+        {isTeacher && (
+          <button 
+            onClick={() => setActiveTab('materiales')} 
+            className={`tab-button ${activeTab === 'materiales' ? 'active' : ''}`}
+          >
+            <FaFolderOpen /> Materiales
+          </button>
+        )}
         <button 
           onClick={() => setActiveTab('alumnos')} 
           className={`tab-button ${activeTab === 'alumnos' ? 'active' : ''}`}
         >
-          <FaUsers /> Alumnos
+          <FaUsers /> {isTeacher ? 'Alumnos' : 'Personas'}
         </button>
       </nav>
 
       <main className="tab-content">
         {activeTab === 'avisos' && (
           <div className="tab-pane announcements-tab">
-            <AnnouncementForm 
-              classId={id} 
-              onAnnouncementCreated={handleAnnouncementCreated} 
-            />
-            <AnnouncementsList announcements={announcements} />
+            {isTeacher && (
+              <div className="form-section">
+                <AnnouncementForm 
+                  classId={id} 
+                  onAnnouncementCreated={handleAnnouncementCreated} 
+                />
+              </div>
+            )}
+            <div className="content-section">
+              <AnnouncementsList announcements={announcements} />
+            </div>
           </div>
         )}
 
         {activeTab === 'tareas' && (
           <div className="tab-pane tasks-tab">
-            <TaskForm classId={id} />
-            <TaskList tasks={tasks} />
+            {isTeacher && (
+              <div className="form-section">
+                <TaskForm classId={id} />
+              </div>
+            )}
+            <div className="content-section">
+              <TaskList tasks={tasks} />
+            </div>
           </div>
         )}
 
-        {activeTab === 'materiales' && (
+        {isTeacher && activeTab === 'materiales' && (
           <div className="tab-pane materials-tab">
-            <MaterialForm classId={id} />
-            <MaterialList materials={materials} />
+            <div className="form-section">
+              <MaterialForm classId={id} />
+            </div>
+            <div className="content-section">
+              <MaterialList materials={materials} />
+            </div>
           </div>
         )}
 
         {activeTab === 'alumnos' && (
-          <div className="tab-pane students-tab">
-            <StudentList classId={id} students={students} />
+          <div className="tab-pane people-tab">
+            <StudentList students={students} />
           </div>
         )}
       </main>
@@ -111,4 +141,4 @@ function TeacherClass() {
   );
 }
 
-export default TeacherClass;
+export default ClassPage;

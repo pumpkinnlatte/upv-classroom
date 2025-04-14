@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AnnouncementsList = ({ announcements }) => {
+export const AnnouncementsList = ({ announcements}) => {
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString('es-ES', {
       year: 'numeric',
@@ -23,9 +23,6 @@ export const AnnouncementsList = ({ announcements }) => {
                 <span className="announcement-date">
                   {formatDate(announcement.fecha_publicacion)}
                 </span>
-              </div>
-              <div className="announcement-content">
-                <p>{announcement.descripcion_aviso}</p>
               </div>
               {announcement.attachments && announcement.attachments.length > 0 && (
                 <div className="announcement-attachments">

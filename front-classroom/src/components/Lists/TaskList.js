@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaFile, FaCalendarAlt, FaClock } from 'react-icons/fa';
+import { FaFile, FaCalendarAlt, FaClock, FaFileUpload } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export const TaskList = ({ tasks }) => {
   const formatDate = (dateString) => {
@@ -32,9 +33,6 @@ export const TaskList = ({ tasks }) => {
                   )}
                 </div>
               </div>
-              <div className="task-content">
-                <p>{task.descripcion_tarea}</p>
-              </div>
               {task.attachments && task.attachments.length > 0 && (
                 <div className="task-attachments">
                   <strong><FaFile /> Archivos adjuntos:</strong>
@@ -49,6 +47,14 @@ export const TaskList = ({ tasks }) => {
                   </ul>
                 </div>
               )}
+              <Link 
+                to={`/student/submit-task/${task.tarea_id}`} 
+                state={{ tasks }}
+                className="submit-task-button"
+              >
+                <FaFileUpload />
+                <span>Entregar</span>
+              </Link>
             </li>
           ))}
         </ul>

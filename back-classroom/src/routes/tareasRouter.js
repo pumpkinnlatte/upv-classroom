@@ -43,6 +43,20 @@ router.post("/get-tareas", auth, async (req, res) => {
     }
 });
 
+// #03 Endpoint para obtener una tarea por su ID (Alumno o profesor)
+router.post("/get-tarea-by-id", auth, async (req, res) => {
+    try {
+        const user = req.userData;  // Usuario autenticado desde el token
+        let tarea;
+
+        tarea = await tareaService.getTareaPorId(req.body.tareaId);
+        res.json(tarea);
+
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener la tarea", error: error.message });
+    }
+});
+
 
 
 module.exports = router;

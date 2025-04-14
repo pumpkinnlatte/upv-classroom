@@ -52,6 +52,7 @@ export const useAnnouncementForm = (classId, onAnnouncementCreated) => {
 
         console.log("Nuevo aviso creado:", newAvisoData);
 
+        //Si existe un archivo
         if (file) {
 
             console.log("aviso idd arrchiiivo", newAvisoData.avisoId);

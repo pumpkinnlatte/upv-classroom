@@ -20,6 +20,18 @@ class TareasService {
         return rows; // Devuelve las tareas asociadas a la clase
     }
 
+    async getTareaPorId(tareaId) {
+        try {
+            if (!tareaId) {
+                throw new Error('ID de tarea no proporcionado');
+            }
+            const [rows] = await db.query('SELECT * FROM tareas WHERE tarea_id = ?', [tareaId]);
+            return rows[0] || null;
+        } catch (error) {
+            console.error('Error in getTareaPorId:', error);
+            throw error;
+        }
+    }
 
 }
 

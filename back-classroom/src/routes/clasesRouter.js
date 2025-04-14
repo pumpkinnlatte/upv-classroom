@@ -64,12 +64,9 @@ router.post("/join-by-code", auth, async (req, res) => {
             return res.status(403).json({ message: "Un profesor no puede ser alumno de una clase" });
         } 
 
-        let agregarData ={
-            claseId: req.body.claseId,
-            usuarioId: user.usuario_id
-        };
+        let codigoClase = req.body.codigoClase;  // Código de la clase a la que se quiere unir
 
-        const result = await claseService.agregarAlumno(agregarData);
+        const result = await claseService.joinByCode(codigoClase, user.usuario_id);
         res.status(201).json(result);
 
 

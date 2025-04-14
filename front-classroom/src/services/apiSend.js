@@ -33,19 +33,42 @@ export const sendFileData = async (formData) => {
     return response.json();
   };
 
-export const sendTask = async (classId) => {
+export const sendTaskData = async (taskData) => {
   const response = await fetch(`${API_BASE_URL}/tareas/create`, {
-    headers: getHeaders()
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(
+      { 
+          tituloTarea: taskData.tituloTarea,  
+          descripcionTarea: taskData.descripcionTarea,
+          fechaPublicacion: "",
+          fechaLimite: taskData.fechaLimite,
+          temaId: taskData.temaId,
+          claseId: taskData.classId
+      })
   });
   if (!response.ok) throw new Error('Error al crear la tarea');
   return response.json();
 };
 
-export const sendMaterialForm = async (classId) => {
-    const response = await fetch(`${API_BASE_URL}/materiales/create`, {
-      headers: getHeaders()
-    });
-    if (!response.ok) throw new Error('Error al crear el material');
-    return response.json();
-  };
+
+export const sendMaterialData = async (materialData) => {
+  const response = await fetch(`${API_BASE_URL}/materiales/create`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(
+      { 
+        tituloMaterial: materialData.tituloMaterial,  
+        descripcionMaterial: materialData.descripcionMaterial,
+        fechaPublicacion: materialData.fechaPublicacion,
+        temaId: "",
+        claseId: materialData.claseId
+      })
+  });
   
+  if (!response.ok) {
+    throw new Error('Error al crear el material');
+  }
+  
+  return response.json();
+};

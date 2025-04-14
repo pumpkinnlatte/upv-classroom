@@ -1,95 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaPaperclip, FaTrashAlt, FaPlusCircle } from 'react-icons/fa';
-const api_route = require("../../config.json").api_route;
+import { useTaskForm } from '../../hooks/useTaskForm';
 
 export const TaskForm = ({ classId, onTaskCreated }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState('');
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      setFileName(selectedFile.name);
-    }
-  };
-
-  const handleRemoveFile = () => {
-    setFile(null);
-    setFileName('');
-    const fileInput = document.getElementById('taskAttachmentFile');
-    if (fileInput) fileInput.value = '';
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!title.trim() || !description.trim()) {
-      alert("Por favor, completa el título y la descripción de la tarea.");
-      return;
-    }
-
-    try {
-      const tareaResponse = await fetch(`${api_route}/tareas/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify({
-          claseId: classId,
-          tituloTarea: title,
-          descripcionTarea: description,
-          fechaLimite: dueDate || null
-        }),
-      });
-
-      if (!tareaResponse.ok) throw new Error('Error al crear la tarea');
-      const tareaData = await tareaResponse.json();
-
-      if (file) {
-        const archivoFormData = new FormData();
-        archivoFormData.append('file', file);
-        archivoFormData.append('claseId', classId);
-        archivoFormData.append('publicacionId', tareaData.tareaId);
-        archivoFormData.append('tipoPublicacion', 'tarea');
-
-        const archivoResponse = await fetch(`${api_route}/archivos/subir-archivo`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-          body: archivoFormData,
-        });
-
-        if (!archivoResponse.ok) {
-          console.error('Error al subir el archivo');
-        }
-      }
-
-      const newTask = {
-        tarea_id: tareaData.tareaId,
-        titulo_tarea: title,
-        descripcion_tarea: description,
-        fecha_limite: dueDate,
-        fecha_publicacion: new Date().toISOString()
-      };
-
-      onTaskCreated(newTask);
-
-      // Reset form
-      setTitle('');
-      setDescription('');
-      setDueDate('');
-      handleRemoveFile();
-
-    } catch (error) {
-      console.error("Error al crear la tarea:", error);
-      alert("Error al crear la tarea.");
-    }
-  };
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    dueDate,
+    setDueDate,
+    file,
+    fileName,
+    handleFileChange,
+    handleRemoveFile,
+    handleSubmit
+  } = useTaskForm(classId, onTaskCreated);
 
   return (
     <section className="add-task-section card-style">
