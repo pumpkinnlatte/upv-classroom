@@ -3,7 +3,7 @@ const db = require("../data-access/db"); //Acceso a la base de datos
 class AvisoService {
 
     async agregarAviso(avisoData) {
-        const sql = `INSERT INTO avisos (clase_id, titulo_aviso, descripcion_aviso, fecha_publicacion, has_file) VALUES (?.?, ?, ?, ?)`;
+        const sql = `INSERT INTO avisos (clase_id, titulo_aviso, descripcion_aviso, fecha_publicacion, has_file) VALUES (?,?, ?, ?, ?)`;
         const [result] = await db.query(sql, [avisoData.clase_id, avisoData.titulo, avisoData.descripcion, avisoData.fechaPublicacion, avisoData.hasFile]);
         
         console.log("Resultado completo de la inserción:", result);
@@ -25,6 +25,16 @@ class AvisoService {
         `;
         const [rows] = await db.query(sql, [claseId]); // Extrae solo las filas
         return rows; // Devuelve los avisos asociados a la clase
+    }
+
+    async getAvisoById(avisoId) {
+        const sql = `
+            SELECT aviso_id, titulo_aviso, descripcion_aviso, fecha_publicacion
+            FROM avisos
+            WHERE aviso_id = ?
+        `;
+        const [rows] = await db.query(sql, [avisoId]); // Extrae solo las filas
+        return rows[0]; // Devuelve el aviso asociado al ID
     }
 }
 

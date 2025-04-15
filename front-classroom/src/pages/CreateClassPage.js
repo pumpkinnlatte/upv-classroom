@@ -74,12 +74,6 @@ function CreateClassPage() {
             <textarea id="description" className="form-input form-textarea" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Ej: Fundamentos del cálculo para ingeniería" rows="3" />
           </div>
 
-          {/* Código del Grupo */}
-          <div className="form-group">
-            <label htmlFor="groupCode">Código del Grupo (Opcional)</label>
-            <input type="text" id="groupCode" className="form-input" value={groupCode} onChange={(e) => setGroupCode(e.target.value)} placeholder="Ej: S1-6A" />
-          </div>
-
           {/* Carrera */}
           <div className="form-group">
             <label htmlFor="career">Carrera <span className="required">*</span></label>

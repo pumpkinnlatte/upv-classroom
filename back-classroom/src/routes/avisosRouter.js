@@ -43,6 +43,18 @@ router.post("/get-avisos", auth, async (req, res) => {
     }
 });
 
+// #03 Endpoint para obtener un aviso por su ID
+router.post("/get-aviso-by-id", auth, async (req, res) => { 
+    try {
+        const avisoId = req.body.avisoId;
+
+        const aviso = await avisoService.getAvisoById(avisoId);
+        res.json(aviso);
+
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener el aviso", error: error.message });
+    }
+});
 
 
 module.exports = router;

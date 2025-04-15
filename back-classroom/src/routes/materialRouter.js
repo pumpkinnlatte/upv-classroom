@@ -43,6 +43,19 @@ router.post("/get-materiales", auth, async (req, res) => {
     }
 });
 
+// #03 Endpoint para obtener un material por su ID
+router.post("/get-material-by-id", auth, async (req, res) => { 
+    try {
+        const materialId = req.body.materialId;
+
+        const material = await materialService.getMaterialById(materialId);
+        res.json(material);
+
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener el material", error: error.message });
+    }
+});
+
 
 
 module.exports = router;

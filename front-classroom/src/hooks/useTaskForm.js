@@ -5,8 +5,10 @@ export const useTaskForm = (classId, onTaskCreated) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [points, setPoints] = useState(100);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState('');
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -31,15 +33,20 @@ export const useTaskForm = (classId, onTaskCreated) => {
     }
 
     try {
+      console.log('ClassId recibido:', classId); // Debug log
+      
       const taskData = {
-        tituloTarea: title,
-        descripcionTarea: description,
-        fechaPublicacion: "",
+        tituloTarea: title.trim(),
+        descripcionTarea: description.trim(),
+        puntosMax: parseInt(points, 10),
+        fechaPublicacion: new Date().toISOString(),
         fechaLimite: dueDate || null,
-        temaId: "",
-        classId: classId, 
+        temaId: selectedTopic || null,
+        clase_id: parseInt(classId, 10), // Ensure it's a number
         hasFile: file ? 1 : 0
       };
+
+      console.log('Datos de la tarea a enviar:', taskData); // Debug log
 
       const newTaskData = await sendTaskData(taskData);
 
@@ -66,17 +73,19 @@ export const useTaskForm = (classId, onTaskCreated) => {
         titulo_tarea: title,
         descripcion_tarea: description,
         fecha_limite: dueDate,
-        fecha_publicacion: new Date().toISOString()
+        fecha_publicacion: new Date().toISOString(),
+        puntos: points
       });
 
       setTitle('');
       setDescription('');
       setDueDate('');
+      setPoints(100);
       handleRemoveFile();
 
     } catch (error) {
       console.error("Error al crear la tarea:", error);
-      alert("Error al crear la tarea.");
+      alert(error.message || "Error al crear la tarea.");
     }
   };
 
@@ -87,8 +96,12 @@ export const useTaskForm = (classId, onTaskCreated) => {
     setDescription,
     dueDate,
     setDueDate,
+    points,
+    setPoints,
     file,
     fileName,
+    selectedTopic,
+    setSelectedTopic,
     handleFileChange,
     handleRemoveFile,
     handleSubmit

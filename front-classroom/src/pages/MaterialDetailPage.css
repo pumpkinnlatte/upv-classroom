@@ -1,0 +1,76 @@
+.material-detail-page {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.material-content {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.material-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.material-header h2 {
+    margin: 0 0 8px 0;
+    color: #1a73e8;
+}
+
+.material-date {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.material-description {
+    line-height: 1.6;
+    margin: 16px 0;
+    white-space: pre-wrap;
+}
+
+.material-files {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.files-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.file-download-button {
+    background: none;
+    border: none;
+    color: #1a73e8;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.file-download-button:hover {
+    text-decoration: underline;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.file-date {
+    color: #666;
+    font-size: 0.85em;
+}

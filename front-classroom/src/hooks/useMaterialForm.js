@@ -6,6 +6,7 @@ export const useMaterialForm = (classId, onMaterialCreated) => {
   const [description, setDescription] = useState('');
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState('');
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -32,10 +33,11 @@ export const useMaterialForm = (classId, onMaterialCreated) => {
     try {
       // Se serializan los datos del material
       const materialData = {
-        tituloMaterial: title,  
-        descripcionMaterial: description,
-        temaId: "",
+        tituloMaterial: title.trim(),
+        descripcionMaterial: description.trim(),
+        fechaPublicacion: new Date().toISOString(),
         claseId: classId,
+        temaId: selectedTopic || null,
         hasFile: file ? 1 : 0
       };
 
@@ -45,6 +47,8 @@ export const useMaterialForm = (classId, onMaterialCreated) => {
       if (!newMaterialData) {
         throw new Error('Error al crear el material');
       }
+
+      alert("Material creado correctamente.");
 
       //Si existe un archivo
       if (file) {
@@ -72,7 +76,7 @@ export const useMaterialForm = (classId, onMaterialCreated) => {
 
     } catch (error) {
       console.error("Error al crear el material:", error);
-      alert("Error al crear el material.");
+      alert(error.message || "Error al crear el material");
     }
   };
 
@@ -83,6 +87,8 @@ export const useMaterialForm = (classId, onMaterialCreated) => {
     setDescription,
     file,
     fileName,
+    selectedTopic,
+    setSelectedTopic,
     handleFileChange,
     handleRemoveFile,
     handleSubmit

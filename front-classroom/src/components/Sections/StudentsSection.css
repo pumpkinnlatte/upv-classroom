@@ -1,0 +1,33 @@
+.students-tab {
+    padding: 20px;
+}
+
+.add-student-section {
+    margin-bottom: 30px;
+}
+
+.add-method-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.method-button {
+    padding: 8px 16px;
+    border: 1px solid #1a73e8;
+    background: none;
+    color: #1a73e8;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.method-button:hover {
+    background-color: #f8f9fa;
+}
+
+.method-button.active {
+    background-color: #1a73e8;
+    color: white;
+}

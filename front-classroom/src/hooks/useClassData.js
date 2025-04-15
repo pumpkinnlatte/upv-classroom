@@ -3,6 +3,7 @@ import { getClass, getAnnouncements, getTasks, getMaterials, getStudents } from 
 
 export function useClassData(classId) {
   const [className, setClassName] = useState('');
+  const [teacherName, setTeacherName] = useState('');
   const [announcements, setAnnouncements] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [materials, setMaterials] = useState([]);
@@ -16,6 +17,7 @@ export function useClassData(classId) {
         console.log('Class Data:', classData);
 
         setClassName(classData.nombre_clase);
+        setTeacherName(classData.nombre_profesor);
 
         const [announcementsData, tasksData, materialsData, studentsData] = await Promise.all([
           getAnnouncements(classId),
@@ -38,6 +40,7 @@ export function useClassData(classId) {
 
   return {
     className,
+    teacherName,
     announcements,
     setAnnouncements,
     tasks,

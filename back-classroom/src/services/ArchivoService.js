@@ -144,6 +144,18 @@ class ArchivoService {
             throw new Error('No se pudo guardar la informacion del archivo en la base de datos');
         }
     }
+
+    async downloadArchivo(classId, year, filename) {
+        try {
+            const filePath = path.resolve(__dirname, '..', '..', 'storage', classId, year, filename);
+            // Verificar si el archivo existe
+            await accessAsync(filePath, fs.constants.F_OK);
+            return filePath;
+        } catch (error) {
+            console.error('Error al acceder al archivo:', error);
+            throw new Error('Archivo no encontrado');
+        }
+    }
     
 }
 

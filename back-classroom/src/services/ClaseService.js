@@ -2,11 +2,31 @@ const db = require("../data-access/db"); //Acceso a la base de datos
 
 class ClaseService {
 
-    //CLASES
+    async isCodigoGrupoUnique(codigoGrupo) {
+        const sql = "SELECT COUNT(*) as count FROM clases WHERE codigo_grupo = ?";
+        const [result] = await db.query(sql, [codigoGrupo]);
+        return result[0].count === 0;
+    }
 
+    async generarCodigoGrupoUnico() {
+        let codigoGrupo;
+        let esUnico = false;
+        
+        while (!esUnico) {
+            codigoGrupo = Math.random().toString(36).substring(2, 9).toUpperCase();
+            esUnico = await this.isCodigoGrupoUnique(codigoGrupo);
+        }
+        
+        return codigoGrupo;
+    }
+
+
+    //CLASES
     async crearClase(claseData) {
+        const codigoGrupo = await this.generarCodigoGrupoUnico();
+
         const sql = "INSERT INTO clases (nombre_clase, descripcion_clase, codigo_grupo, carrera, cuatrimestre, profesor_id) VALUES (?, ?, ?, ?, ?, ?)";
-        const result = await db.query(sql, [claseData.nombre, claseData.descripcion, claseData.codigoGrupo, claseData.carrera, claseData.cuatrimestre, claseData.profesorId]);
+        const result = await db.query(sql, [claseData.nombre, claseData.descripcion, codigoGrupo, claseData.carrera, claseData.cuatrimestre, claseData.profesorId]);
         return {message: "Clase creada con éxito", claseId: result.insertId, claseNombre: claseData.nombre};
     }
 
@@ -31,10 +51,13 @@ class ClaseService {
 
     async getClaseById(claseId) {  //Obtener una clase por su ID
         const sql = `
-            SELECT clase_id, nombre_clase, descripcion_clase, codigo_grupo, carrera, cuatrimestre
-            FROM clases WHERE clase_id = ?`;
-        const [rows] = await db.query(sql, [claseId]); // Extrae solo las filas
-        return rows[0]; // Devuelve solo la primera fila
+            SELECT c.clase_id, c.nombre_clase, c.descripcion_clase, c.codigo_grupo, 
+                   c.carrera, c.cuatrimestre, c.profesor_id, u.nombre AS nombre_profesor
+            FROM clases c
+            JOIN usuarios u ON c.profesor_id = u.usuario_id
+            WHERE c.clase_id = ?`;
+        const [rows] = await db.query(sql, [claseId]);
+        return rows[0];
     }
 
     //ALUMNOS
@@ -55,12 +78,6 @@ class ClaseService {
         return rows; // Devuelve solo las filas
     }
 
-    async crearTema(claseId, temaData) {
-        const sql = "INSERT INTO temas (nombre_tema, descripcion_tema, clase_id) VALUES (?, ?, ?)";
-        const result = await db.query(sql, [temaData.nombreTema, temaData.descripcionTema, claseId]);
-        return {message: "Tema creado con éxito", temaId: result.insertId, temaNombre: temaData.nombreTema, claseId: claseId};
-    }
-
     async joinByCode(classCode, usuarioId) {
         //Unirse a una clase por su código
         const sql = `
@@ -75,6 +92,22 @@ class ClaseService {
         } else {
             return {message: "Clase unida con éxito", codigo: classCode};
         }
+    }
+
+    //TEMAS
+
+    async crearTema(claseId, temaData) {
+        const sql = "INSERT INTO temas (nombre_tema, descripcion_tema, clase_id) VALUES (?, ?, ?)";
+        const result = await db.query(sql, [temaData.nombreTema, temaData.descripcionTema, claseId]);
+        return {message: "Tema creado con éxito", temaId: result.insertId, temaNombre: temaData.nombreTema, claseId: claseId};
+    }
+
+    async getTemasByClase(claseId) {  //Obtener Temas asociados a una clase
+        const sql = `
+            SELECT tema_id, nombre_tema, descripcion_tema
+            FROM temas WHERE clase_id = ?`;
+        const [rows] = await db.query(sql, [claseId]); // Extrae solo las filas
+        return rows; // Devuelve solo las filas
     }
 
 }

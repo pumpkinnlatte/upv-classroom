@@ -1,66 +1,35 @@
 import React from 'react';
-import { FaFile, FaCalendarAlt, FaClock, FaFileUpload } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './TaskList.css';
 
-export const TaskList = ({ tasks }) => {
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+export function TaskList({ tasks, classId }) {
+  const navigate = useNavigate();
+
+  if (!tasks || tasks.length === 0) {
+    return <p className="no-tasks">No hay tareas disponibles</p>;
+  }
+
+  const handleTaskClick = (taskId) => {
+    navigate(`/c/${classId}/t/${taskId}`);
   };
 
   return (
-    <section className="tasks-display-section">
-      <h3>Tareas Asignadas</h3>
-      {tasks.length > 0 ? (
-        <ul className="tasks-list">
-          {tasks.map(task => (
-            <li key={task.tarea_id} className="task-item">
-              <div className="task-header">
-                <h4>{task.titulo_tarea}</h4>
-                <div className="task-meta">
-                  <span className="task-date">
-                    <FaCalendarAlt /> Publicado: {formatDate(task.fecha_publicacion)}
-                  </span>
-                  {task.fecha_limite && (
-                    <span className="task-due-date">
-                      <FaClock /> Entrega: {formatDate(task.fecha_limite)}
-                    </span>
-                  )}
-                </div>
-              </div>
-              {task.attachments && task.attachments.length > 0 && (
-                <div className="task-attachments">
-                  <strong><FaFile /> Archivos adjuntos:</strong>
-                  <ul>
-                    {task.attachments.map((file, index) => (
-                      <li key={index}>
-                        <a href={file.url} target="_blank" rel="noopener noreferrer">
-                          {file.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <Link 
-                to={`/student/submit-task/${task.tarea_id}`} 
-                state={{ tasks }}
-                className="submit-task-button"
-              >
-                <FaFileUpload />
-                <span>Entregar</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="no-tasks">No hay tareas asignadas.</p>
-      )}
-    </section>
+    <div className="task-list">
+      {tasks.map((task) => (
+        <div 
+          key={task.tarea_id} 
+          className="task-item"
+          onClick={() => handleTaskClick(task.tarea_id)}
+        >
+          <div className="task-meta">
+            <h3>{task.titulo_tarea}</h3>
+            <p>{task.descripcion}</p>
+            <p className="task-date">
+              Publicado: {new Date(task.fecha_publicacion).toLocaleDateString()}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
   );
-};
+}

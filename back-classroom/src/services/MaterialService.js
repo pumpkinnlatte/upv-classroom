@@ -20,6 +20,16 @@ class TareasService {
         return rows; // Devuelve los materiales asociadas a la clase
     }
 
+    async getMaterialById(materialId) {
+        const sql = `
+            SELECT material_id, titulo_material, descripcion_material, fecha_publicacion, tema_id
+            FROM materiales
+            WHERE material_id = ?
+        `;
+        const [rows] = await db.query(sql, [materialId]); // Extrae solo las filas
+        return rows[0]; // Devuelve el material asociado al ID
+    }
+
 }
 
 module.exports = new TareasService;

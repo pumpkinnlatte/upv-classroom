@@ -1,0 +1,80 @@
+.topic-section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.topic-title {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+
+.topic-description {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.topic-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tasks-group, .materials-group {
+  margin-bottom: 25px;
+}
+
+.tasks-group h4, .materials-group h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #495057;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.tasks-list, .materials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-item, .material-item {
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.task-item:hover, .material-item:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.task-header, .material-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.task-header h5, .material-header h5 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.task-icon, .material-icon {
+  color: #6c757d;
+}
+
+.due-date {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 8px;
+}

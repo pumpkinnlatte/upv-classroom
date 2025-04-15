@@ -134,4 +134,20 @@ router.post("/create-topic", auth, async (req, res) => {
 
 });
 
+// #07 Endpoint para obtener los temas de una clase
+router.post("/get-topics", auth, async (req, res) => {
+    try{
+        const user = req.userData;  // Usuario autenticado desde el token
+
+        const data = req.body;  // Datos de la clase
+
+        const result = await claseService.getTemasByClase(data.claseId);
+        res.status(201).json(result);
+
+    } catch (error){
+        res.status(500).json({ message: "Error al obtener los temas de la clase", error: error.message });
+    }
+
+});
+
 module.exports = router;

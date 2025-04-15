@@ -39,16 +39,7 @@ export const sendTaskData = async (taskData) => {
   const response = await fetch(`${API_BASE_URL}/tareas/create`, {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify(
-      { 
-          tituloTarea: taskData.tituloTarea,  
-          descripcionTarea: taskData.descripcionTarea,
-          fechaPublicacion: "",
-          fechaLimite: taskData.fechaLimite,
-          temaId: taskData.temaId,
-          claseId: taskData.classId,
-          hasFile: taskData.hasFile
-      })
+    body: JSON.stringify(taskData)
   });
   if (!response.ok) throw new Error('Error al crear la tarea');
   return response.json();
@@ -59,15 +50,7 @@ export const sendMaterialData = async (materialData) => {
   const response = await fetch(`${API_BASE_URL}/materiales/create`, {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify(
-      { 
-        tituloMaterial: materialData.tituloMaterial,  
-        descripcionMaterial: materialData.descripcionMaterial,
-        fechaPublicacion: materialData.fechaPublicacion,
-        temaId: materialData.temaId,
-        claseId: materialData.claseId,
-        hasFile: materialData.hasFile
-      })
+    body: JSON.stringify(materialData)
   });
   
   if (!response.ok) {
@@ -76,6 +59,21 @@ export const sendMaterialData = async (materialData) => {
   
   return response.json();
 };
+
+
+export const sendTopicData = async (topicData) => {
+  const response = await fetch(`${API_BASE_URL}/class/create-topic`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(topicData)
+  });
+  
+  if (!response.ok) {
+    throw new Error('Error al crear el tema');
+  }
+  
+  return response.json();
+}
 
 export const logout = async () => {
 
@@ -92,3 +90,23 @@ export const logout = async () => {
   }
   return response.json();
 };
+
+
+
+export const actualizarCalificacion = async (submissionId, newGrade) => {
+  const response = await fetch(`${API_BASE_URL}/tareas/calificar-tarea`, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify({
+        entregaId: submissionId,
+        calificacion: newGrade
+      })
+  });
+
+  if (!response.ok) {
+    throw new Error('Error al actualizar la calificacion');
+  }
+
+  return response.json();
+};
+

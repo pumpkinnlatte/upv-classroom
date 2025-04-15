@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middlewares/auth");  // Middleware de autenticación
+const auth = require("../middlewares/auth");
 const multer = require('multer');
-
+const path = require('path');
 const archivoService = require("../services/ArchivoService");  // Instancia del servicio de archivos
 
 // Configuración básica de multer
@@ -48,6 +48,18 @@ router.post("/get-archivos", auth, async (req, res) => {
   }
 });
 
+// #03 Endpoint para descargar archivos
+router.get('/download/:classId/:year/:filename', auth, async (req, res) => {
+  try {
+    const { classId, year, filename } = req.params;
 
+    console.log("Se intento descargar")
+
+    const filePath = await archivoService.downloadArchivo(classId, year, filename);
+    res.download(filePath, filename);
+  } catch (error) {
+    res.status(404).json({ message: "Archivo no encontrado" });
+  }
+});
 
 module.exports = router;
