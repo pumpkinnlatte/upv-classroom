@@ -4,8 +4,8 @@ class TareasService {
 
     //Materiales
     async crearMaterial(materialData) {
-        const sql = "INSERT INTO materiales (titulo_material, descripcion_material, fecha_publicacion, tema_id, clase_id) VALUES (?, ?, ?, ?, ?)";
-        const result = await db.query(sql, [materialData.tituloMaterial, materialData.descripcionMaterial, materialData.fechaPublicacion, materialData.temaId, materialData.claseId]);
+        const sql = "INSERT INTO materiales (titulo_material, descripcion_material, fecha_publicacion, has_file, tema_id, clase_id ) VALUES (?, ?, ?, ?, ?, ?)";
+        const result = await db.query(sql, [materialData.tituloMaterial, materialData.descripcionMaterial, materialData.fechaPublicacion, materialData.hasFile, materialData.temaId, materialData.claseId]);
         return {message: "Material creado con éxito", tareaId: result.insertId, tituloMaterial: materialData.tituloMaterial, fechaPublicacion: materialData.fechaPublicacion};
     }
 

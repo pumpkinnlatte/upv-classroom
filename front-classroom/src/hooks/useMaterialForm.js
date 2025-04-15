@@ -35,7 +35,8 @@ export const useMaterialForm = (classId, onMaterialCreated) => {
         tituloMaterial: title,  
         descripcionMaterial: description,
         temaId: "",
-        claseId: classId
+        claseId: classId,
+        hasFile: file ? 1 : 0
       };
 
       // Se envian los datos a la API  

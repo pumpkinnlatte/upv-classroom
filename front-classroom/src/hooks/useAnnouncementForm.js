@@ -37,6 +37,7 @@ export const useAnnouncementForm = (classId, onAnnouncementCreated) => {
             titulo: title,
             descripcion: text,
             fechaPublicacion: "",
+            hasFile: file ? 1 : 0
         }
 
         console.log("Datos del aviso:", avisoData);

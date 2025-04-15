@@ -1,7 +1,6 @@
 // src/pages/LoginPage.js - SIMPLIFICADO
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
 
 import './LoginPage.css';
 const api_route = require("../config.json").api_route; // Importar la ruta base de la API
@@ -51,14 +50,7 @@ function LoginPage() {
         //Guardar en el localStorage
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
-
-        const decoded = jwtDecode(data.accessToken);
-
-        if (decoded.tipoUsuario === "profesor") {
-            navigate("/teacher/home");
-        } else {
-            navigate("/student/home");
-        }
+        navigate("/")
 
       } else {
         setError(data.error || "Error en el inicio de sesión.");

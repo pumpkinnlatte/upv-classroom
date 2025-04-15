@@ -36,6 +36,13 @@ class ArchivoService {
         }
     }
 
+     /*async asociarEntregaArchivo(asociadoData) {
+        const sql = "INSERT INTO archivos_entregas (archivo_id, entrega_id) VALUES (?, ?)";
+        const result = await db.query(sql, [asociadoData.archivoId, asociadoData.entregaId]);
+        return {message: "Archivo asociado a la entrega con éxito", archivoEntregaId: result.insertId};
+    }*/
+
+
     async subirArchivo(archivoData, file) {
         try {
             const fecha = new Date(archivoData.fechaPublicacion); 

@@ -5,6 +5,7 @@ const getHeaders = () => ({
   'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
 });
 
+
 export const sendAnnouncementData = async (avisoData) => {
   const response = await fetch(`${API_BASE_URL}/announcements/create`, {
     method: 'POST',
@@ -15,6 +16,7 @@ export const sendAnnouncementData = async (avisoData) => {
             titulo: avisoData.titulo,
             descripcion: avisoData.descripcion,
             fechaPublicacion: avisoData.fechaPublicacion,
+            hasFile: avisoData.hasFile
         })
   });
   if (!response.ok) throw new Error('Error al crear el aviso');
@@ -44,7 +46,8 @@ export const sendTaskData = async (taskData) => {
           fechaPublicacion: "",
           fechaLimite: taskData.fechaLimite,
           temaId: taskData.temaId,
-          claseId: taskData.classId
+          claseId: taskData.classId,
+          hasFile: taskData.hasFile
       })
   });
   if (!response.ok) throw new Error('Error al crear la tarea');
@@ -61,8 +64,9 @@ export const sendMaterialData = async (materialData) => {
         tituloMaterial: materialData.tituloMaterial,  
         descripcionMaterial: materialData.descripcionMaterial,
         fechaPublicacion: materialData.fechaPublicacion,
-        temaId: "",
-        claseId: materialData.claseId
+        temaId: materialData.temaId,
+        claseId: materialData.claseId,
+        hasFile: materialData.hasFile
       })
   });
   
@@ -70,5 +74,21 @@ export const sendMaterialData = async (materialData) => {
     throw new Error('Error al crear el material');
   }
   
+  return response.json();
+};
+
+export const logout = async () => {
+
+  const response=  await fetch(`${API_BASE_URL}/account/logout`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({
+      refreshToken: localStorage.getItem('refreshToken')
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error('Error al cerrar sesión');
+  }
   return response.json();
 };

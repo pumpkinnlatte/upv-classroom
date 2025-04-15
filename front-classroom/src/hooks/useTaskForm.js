@@ -38,6 +38,7 @@ export const useTaskForm = (classId, onTaskCreated) => {
         fechaLimite: dueDate || null,
         temaId: "",
         classId: classId, 
+        hasFile: file ? 1 : 0
       };
 
       const newTaskData = await sendTaskData(taskData);

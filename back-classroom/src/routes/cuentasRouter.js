@@ -53,7 +53,31 @@ router.post("/refresh-token", async (req, res) => {
     res.json({accessToken});
 });
 
-// #03 Endpoint para obtener la información del usuario
+// #03 Endpoint para cerrar sesión (invalidar el refresh token)
+router.post("/logout", auth, async (req, res) => {
+    try {
+
+        const user = req.userData;  // Usuario autenticado desde el token
+        if (!user) {
+            return res.status(400).json({ message: "Access token no válido o expirado" });
+        }
+
+        const refreshToken = req.body.refreshToken;
+        
+        if (!refreshToken) {
+            return res.status(400).json({ message: "Refresh token no proporcionado" });
+        }
+
+        await accountService.invalidarRefreshToken(refreshToken);
+
+        res.json({ message: "Sesión cerrada exitosamente" });
+    } catch (error) {
+        console.error("Error en logout:", error);
+        res.status(500).json({ message: "Error al cerrar la sesión" });
+    }
+});
+
+// #04 Endpoint para obtener la información del usuario
 router.get("/user-info", auth, (req, res) => {
     res.json(req.userData);
 });

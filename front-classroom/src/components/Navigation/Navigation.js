@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import './Navigation.css';
+import { logout } from '../../services/apiSend';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -14,10 +15,15 @@ function Navigation() {
     userRole = decoded.tipoUsuario;
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Error durante el logout:', error);
+      // Still clear local storage and redirect even if the server request fails
+      navigate('/login');
+    }
   };
 
   if (!isLoggedIn) {

@@ -4,7 +4,7 @@ import Navigation from './components/Navigation/Navigation';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import ClassPage from './pages/ClassPage';
-import TeacherCreateClass from './pages/TeacherCreateClass';
+import CreateClassPage from './pages/CreateClassPage';
 import './App.css';
 
 function PrivateRoute({ children }) {
@@ -43,7 +43,7 @@ function App() {
               path="/teacher/create-class"
               element={
                 <PrivateRoute>
-                  <TeacherCreateClass />
+                  <CreateClassPage />
                 </PrivateRoute>
               }
             />
