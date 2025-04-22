@@ -1,0 +1,19 @@
+{
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "upv_classroom",
+        "port": 3306,
+        "waitForConnections": true,
+        "connectionLimit": 64,
+        "queueLimit": 0
+    },
+    "accountServiceConfig": {
+        "accessTokenSecret": "PAPOTA01",
+        "accessTokenExpirationSec": 10000,
+        "refreshTokenExpirationDays": 1,
+        "passwordSaltWorkFactor": 12
+    }
+}
+

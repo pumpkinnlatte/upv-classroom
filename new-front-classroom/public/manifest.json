@@ -1,0 +1,8 @@
+{
+  "short_name": "UPV Classroom",
+  "name": "UPV Classroom",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1560BD",
+  "background_color": "#ffffff"
+}

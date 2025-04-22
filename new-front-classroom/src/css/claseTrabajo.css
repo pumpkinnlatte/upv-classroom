@@ -1,0 +1,119 @@
+
+.create-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    gap: 0.7rem;
+    padding: 1rem;
+}
+
+.create-options .btn-2 {
+    padding: 1.8rem 0 1.8rem 1rem;
+    font-size: 13px;
+}
+
+.btn-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    height: fit-content;
+}
+
+
+.no-theme {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding-bottom: 3rem;
+}
+
+.no-theme .theme-title {
+    padding-bottom: 1.5rem;
+    border-bottom: none;
+}
+
+
+.theme-component {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding-bottom: 3rem;
+}
+
+.theme-title {
+    padding-bottom: 1.5rem;
+    border-bottom: var(--linear-gray) 1px solid;
+}
+
+.theme-title h3{
+    color: var(--raisin-black);
+}
+
+.trabajo-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.6rem;
+    border-bottom: var(--linear-gray) 1px solid;
+    gap: 0.6rem;
+}
+
+.trabajo-header {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: max-content;
+    align-items: center;
+}
+
+.trabajo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--tufus-blue);
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+}
+
+.trabajo-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.5rem;
+}
+
+.trabajo-content .content-left {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.trabajo-content .content-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+}
+
+.content-right .trabajo-fechas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.trabajo-fechas p{
+    color: var(--outer-space);
+    font-weight: 400;
+    font-size: 12px;
+}

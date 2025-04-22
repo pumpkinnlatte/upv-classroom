@@ -1,0 +1,269 @@
+.publication-detail {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding-right: 2rem;
+}
+
+.detail-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.detail-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    border-bottom: 1px solid var(--linear-gray);
+    padding-bottom: 1rem;
+}
+
+.header-top{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detail-header .header-top-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:0.5rem;
+
+}
+
+.header-top-details p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--outer-space);
+}
+
+.header-top h1 {
+    color: var(--raisin-black);
+}
+
+.detail-header .header-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.detail-content{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--linear-gray);
+}
+
+
+/* Formulario */
+
+.entrega-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: fit-content;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--linear-gray);
+}
+
+.entrega-form-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grade-input input {
+    width: 60px;
+    margin-right: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.student-file {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-height: 200px;
+}
+
+
+
+/* Estilos para el profesor */
+
+.center-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.center-tarea-left {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 40%;
+    height: auto;
+    box-sizing: border-box;
+    border-right: 1px solid var(--linear-gray);
+}
+
+.center-tarea {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2% 2%;
+    gap: 2rem;
+}
+
+.top-tarea {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.top-tarea-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--linear-gray);
+    padding: 1rem;
+}
+
+.top-tarea-info .p-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 00;
+    color: var(--raisin-black);
+}
+
+.top-tarea-info .p-asignada {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--cobalt-blue);
+}
+
+.top-tarea-ex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.top-tarea-ex span {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--outer-space);
+}
+
+
+/* Estilos componente entrega */
+
+
+.entregas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.entrega-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: fit-content;
+    border-top: 1px solid var(--linear-gray);
+    border-bottom: 1px solid var(--linear-gray);
+}
+
+.entrega-left {
+    width: 100%;
+    padding: 1rem;
+    border-right: 1px solid var(--linear-gray);
+}
+
+.entrega-left span{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--outer-space);
+}
+
+
+.entrega-right {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.entrega-right span{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--outer-space);
+}
+
+.calif-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: 100%;
+}
+
+.grade-input {
+    height: min-content !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    width: 40% !important;
+    text-align: right !important;
+}
+
+.archivos-adjuntos {
+    
+}
+
+.archivo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    margin: 5px 0;
+}
+
+.archivo-item a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.archivo-item a:hover {
+    text-decoration: underline;
+}
+
+.download-link {
+    background: none;
+    border: none;
+    color: #0066cc;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.download-link:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}

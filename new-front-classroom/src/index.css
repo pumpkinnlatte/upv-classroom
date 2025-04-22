@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* PALETA DE COLORES */
+:root {
+  --cobalt-blue: #1560BD;
+  --tufus-blue: #3E8EDE;
+  --gay-blue: rgb(232, 240, 254);
+  --outer-space: #4A525A;
+  --raisin-black: #24272B;
+  --gay-gray: #909295;
+  --ultragay-gray: #f2f2f2;
+  --linear-gray: #e5e5e5;
+}
+
+/*
+  100 (Thin)
+  200 (Extra Light)
+  300 (Light)
+  400 (Regular)
+  500 (Medium)
+  600 (Semi Bold)
+  700 (Bold)
+  800 (Extra Bold)
+  900 (Black)
+
+*/
+
+h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 36px;
+  font-weight: 400; 
+  color: var(--outer-space);
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 400; 
+  color: var(--outer-space);
+  margin: 0;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 400; 
+  color: var(--outer-space);
+  margin: 0;
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400; 
+  color: var(--outer-space);
+  margin: 0;
+}
+
+span {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--outer-space);
+  margin: 0;
+}
+
+span .description{
+  color: var(--gay-gray);
+  margin: 0;
+}
+
+p {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--raisin-black);
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gay-gray);
+  margin: 0;
+}
+
+
+/* ESTILOS PARA LOS INPUTS */
+
+label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--outer-space);
+  margin: 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="datetime-local"],
+select {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--outer-space);
+  padding: 8px 16px;
+  border-style: none;
+  border-bottom: 1.5px solid var(--gay-gray);
+  background-color: var(--ultragay-gray);
+  width: 100%;
+  height: 2.8rem;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="email"]:hover,
+input[type="number"]:hover,
+input[type="datetime-local"]:hover,
+select:hover {
+  outline: none;
+  background-color: var(--linear-gray);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="datetime-local"]:focus,
+select:focus {
+  outline: none;
+  animation: wave-border 1s ease forwards;
+}
+
+/* Estilos para select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23909295' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* Estilos para las opciones del select */
+select option {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--outer-space);
+  background-color: white;
+  padding: 12px 16px;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+select option:checked {
+  background-color: var(--gay-blue);
+  color: var(--outer-space);
+  height: 90px;
+}
+
+select option:hover {
+  background-color: var(--ultragay-gray);
+}
+
+
+/* Eliminar la flecha nativa en IE */
+select::-ms-expand {
+  display: none;
+}
+
+/* Specific styles for datetime-local to better match other inputs */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit {
+  color: var(--outer-space);
+}
+
+input[type="datetime-local"]::placeholder {
+  color: var(--gay-gray);
+}
+/* Estilos para textarea */
+textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--outer-space);
+  padding: 8px 15px;
+  border-style: none;
+  border-bottom: 1.5px solid var(--gay-gray);
+  background-color: var(--ultragay-gray);
+  width: 100%;
+  min-height: 6rem;
+  height: auto;
+  box-sizing: border-box;
+  resize: none;
+  overflow: hidden;   
+}
+
+textarea:hover {
+  outline: none;
+  background-color: var(--linear-gray);
+}
+
+/* Define la animación de la ola */
+@keyframes wave-border {
+  0% {
+    border-bottom: 2px solid transparent;
+  }
+  50% {
+    border-bottom: 2px solid var(--cobalt-blue);
+    transform-origin: right;
+  }
+  100% {
+    border-bottom: 2px solid var(--cobalt-blue);
+    transform-origin: left;
+  }
+}
+
+textarea:focus {
+  outline: none;
+  animation: wave-border 0.6s ease forwards;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--tufus-blue);
+  box-shadow: 0 0 0 2px var(--gay-blue);
+}
+
+/* Estilos para estados deshabilitados */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--ultragay-gray);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Estilos para placeholder */
+::placeholder {
+  color: var(--gay-gray);
+  opacity: 0.7;
+}
+
+/* ESTILOS PARA LOS BOTONES */
+
+.btn-1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background-color: var(--tufus-blue);
+  border-radius: 0.5rem;
+  border-style: none;
+  border-bottom: 2px solid var(--cobalt-blue);
+  padding: 8px 12px;
+  height: 2.6rem;
+  cursor: pointer;
+}
+
+.btn-1:disabled {
+  background-color: var(--gay-gray);
+  border: var(--raisin-black);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-2 {
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 8px 12px;
+  color: var(--tufus-blue);
+  background-color: white;
+  border-radius: 0.5rem;
+  border-style: none;
+  border: 1px solid var(--linear-gray);
+  border-bottom: 2px solid var(--linear-gray);
+  width: 100%;
+  height: 2.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.7rem;
+  background-color: white;
+  color: var(--outer-space);
+  padding: 0.2rem 0.5rem;
+  width: 30%;
+  height: 2.6rem;
+}
+
+.btn-3:hover {
+  background-color: var(--ultragay-gray);
+  
+}
+
+.title-link:hover h3 {
+  color: green;
+  transition: color 0.3s ease;
+  text-decoration: underline;
+}
+
+.class-link a{
+  display: flex;
+  flex-direction: row;
+  width: 1000px;
+}
+
+.class-link:hover h4 {
+  color: var(--tufus-blue);
+  transition: color 0.3s ease;
+  text-decoration: underline;
+}
+
+.class-link:hover span {
+  color: var(--tufus-blue);
+  transition: color 0.3s ease;
+  text-decoration: underline;
+}
+

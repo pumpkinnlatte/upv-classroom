@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-originalfillcolor="#1a1a1a" transform="rotate(0) scale(1, 1)">
+ <g class="layer">
+  <title>Layer 1</title>
+  <use id="svg_5" transform="matrix(1.07506 0 0 1.11454 -1.61871 -2.58993)" x="0.52" xlink:href="#svg_4" y="1.07"/>
+ </g>
+ <defs>
+  <symbol fill-rule="nonzero" height="24px" id="svg_4" viewBox="0,0,256,256" width="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <g fill="#ffffff" fill-rule="nonzero" font-family="none" font-size="none" font-weight="none" stroke-dashoffset="0" stroke-miterlimit="10" text-anchor="none">
+    <g transform="scale(16,16)">
+     <path d="m4.5,2c-0.82,0 -1.5,0.68 -1.5,1.5l0,9c0,0.82 0.68,1.5 1.5,1.5l7,0c0.82,0 1.5,-0.68 1.5,-1.5l0,-7.21l-3.29,-3.29l-5.21,0zm0,1l4.5,0l0,3l3,0l0,6.5c0,0.28 -0.22,0.5 -0.5,0.5l-7,0c-0.28,0 -0.5,-0.22 -0.5,-0.5l0,-9c0,-0.28 0.22,-0.5 0.5,-0.5zm5.5,0.71l1.29,1.29l-1.29,0l0,-1.29zm-5,3.29l0,1l1,0l0,-1l-1,0zm2,0l0,1l4,0l0,-1l-4,0zm-2,2l0,1l1,0l0,-1l-1,0zm2,0l0,1l4,0l0,-1l-4,0zm-2,2l0,1l1,0l0,-1l-1,0zm2,0l0,1l4,0l0,-1l-4,0z"/>
+    </g>
+   </g>
+  </symbol>
+ </defs>
+</svg>
