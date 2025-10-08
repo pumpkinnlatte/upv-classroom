@@ -9,19 +9,19 @@ function PublicationItem({tipoPublicacion, pubData, nombreProfesor, classId}) {
     let linkTo = "";
 
     if(tipoPublicacion === "material"){
-        inter = "nuevo material";
+        inter = "publicó nuevo material";
         icon = "/svg/icons8-book.svg";
         linkTo = `/t/${classId}/material/${pubData.material_id}`;
     }
 
     if(tipoPublicacion === "tarea"){
-        inter = "una nueva tarea";
+        inter = "publicó una nueva tarea";
         icon = "/svg/icons8-brief.svg";
         linkTo = `/t/${classId}/tarea/${pubData.tarea_id}`;
     }
 
     if(tipoPublicacion === "aviso"){
-        inter = "un nuevo aviso";
+        inter = "";
         icon = "/svg/icons8-notification.svg";
         linkTo = `/t/${classId}/aviso/${pubData.aviso_id}`;
     }
@@ -43,7 +43,9 @@ function PublicationItem({tipoPublicacion, pubData, nombreProfesor, classId}) {
             </div>
 
             <div className="publication-content">
-                <span className="publication-title">{nombreProfesor} publicó {inter}: {pubData.titulo}</span>
+                <span className="publication-title">
+                    {nombreProfesor}{inter}: {pubData.titulo}
+                </span>
                 <p className="publication-date">{formatDate(pubData.date)}</p>
                 {tipoPublicacion === "aviso" ? 
                     <div className="publication-text">

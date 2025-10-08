@@ -64,3 +64,27 @@
   font-size: 14px;
   text-align: center;
 }
+
+.u-examples {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.u-examples div {
+  gap: 10px;
+}
+
+.u-examples p {
+  font-size: 14px;
+  color: #5f6368;
+  /*text-align: center;*/
+}
+
+.u-examples h4 {
+  font-size: 14px;
+  color: #000;
+  /*text-align: center;*/
+}

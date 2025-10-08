@@ -1,0 +1,6 @@
+# Ignora todas las carpetas node_modules en cualquier nivel
+node_modules/
+
+# Opcionalmente ignora archivos de log y entorno
+npm-debug.log*
+.env

@@ -35,11 +35,14 @@
 .center-title .title-description * {
   color: white;
   font-weight: 400;
+
 }
-.center-title.title-description{
+
+.center-title .title-description{
   display: flex;
   flex-direction: column;
   justify-content: left;    
+  gap: 0.6rem;
 }
 
 .center-body {

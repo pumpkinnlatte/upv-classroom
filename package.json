@@ -1,0 +1,14 @@
+{
+  "name": "upv-classroom-monorepo",
+  "private": true,
+  "workspaces": [
+    "front-classroom",
+    "back-classroom"
+  ],
+  "scripts": {
+    "start": "concurrently \"npm run start --workspace front-classroom\" \"npm run start --workspace back-classroom\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
