@@ -12,6 +12,8 @@ function ClasePersonas ({isTeacher}){
     const { currentClass } = useClass();
     const navigate = useNavigate();
 
+    const alumCountString = students.length === 1 ? "1 alumno" : `${students.length} alumnos`;
+
     useEffect(() => {
         const fetchStudents = async () => {
             try {
@@ -53,7 +55,7 @@ function ClasePersonas ({isTeacher}){
                                     <h2>Compañeros de clase</h2>
                                 }
                                 <div className="alumnos-info">
-                                    <span>{students.length} alumnos</span>
+                                    <span>{alumCountString}</span>
                                     {isTeacher ?
                                         <button className="add-user-button" onClick ={handleButtonClick}>
                                             <img src="/svg/icons8-add-user-male.svg" alt="user icon" width={24}/>
