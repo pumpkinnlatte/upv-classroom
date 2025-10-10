@@ -4,7 +4,7 @@ export const ClaseFormLeft = ({ formData, handleInputChange, handleSubmit }) => 
     return(
         <div className="tema-wrapper">
             <div className="left-form">
-                <label>Nombre</label>
+                <label>Nombre *</label>
                 <input 
                     type="text" 
                     name="nombre"
@@ -21,7 +21,7 @@ export const ClaseFormLeft = ({ formData, handleInputChange, handleSubmit }) => 
                     placeholder="Agrega una descripcion (opcional)"
                 ></textarea>
 
-                <label>Carrea</label>
+                <label>Carrera *</label>
                 <select 
                     name="carrera"
                     value={formData.carrera}
@@ -35,7 +35,7 @@ export const ClaseFormLeft = ({ formData, handleInputChange, handleSubmit }) => 
                     <option value="Administracion">Administracion</option>
                 </select>
 
-                <label>Cuatrimestre</label>
+                <label>Cuatrimestre *</label>
                 <select 
                     name="cuatrimestre"
                     value={formData.cuatrimestre}
