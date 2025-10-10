@@ -70,7 +70,7 @@ function TareaDetail ({isTeacher}){
         document.body.removeChild(link);
     };
 
-    if (loading) return <div>Cargando...</div>;
+    if (loading) return;
     if (error) return <div>Error: {error}</div>;
     if (!tarea) return <div>No se encontró la tarea</div>;
 

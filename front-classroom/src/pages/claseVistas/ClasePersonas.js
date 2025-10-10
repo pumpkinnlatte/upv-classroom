@@ -67,7 +67,7 @@ function ClasePersonas ({isTeacher}){
                             </div>
                             <div className="alumnos-list">
                                 {loading ? (
-                                    <p>Cargando alumnos...</p>
+                                    <p> </p>
                                 ) : (
                                     students.map(student => (
                                         <UserItem 

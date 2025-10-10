@@ -24,7 +24,7 @@ function MaterialDetail() {
         }
     }, [material, materialId]);
 
-    if (loading) return <div>Cargando...</div>;
+    if (loading) return;
     if (error) return <div>Error: {error}</div>;
     if (!material) return <div>No se encontró el material</div>;
 

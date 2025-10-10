@@ -33,7 +33,7 @@ function ClaseNovedades({isTeacher}) {
     console.log("currentClass", currentClass);
 
     if (loading) {
-        return <div>Cargando publicaciones...</div>;
+        return;
     }
 
     if (error) {

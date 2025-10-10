@@ -19,7 +19,7 @@ function ClaseTrabajo ({isTeacher}){
         return <Navigate to="/" />;
     }
 
-    if (loading) return <div>Cargando...</div>;
+    if (loading) return;
     if (error) return <div>Error: {error}</div>;
 
     // Combinamos las tareas y los materiales en un solo array

@@ -11,7 +11,7 @@ function AvisoDetail() {
     const { currentClass } = useClass();
     const { aviso, avisoFiles, loading, error } = useAvisoDetail(avisoId);
 
-    if (loading) return <div>Cargando...</div>;
+    if (loading) return ;
     if (error) return <div>Error: {error}</div>;
     if (!aviso) return <div>No se encontró el aviso</div>;
 
