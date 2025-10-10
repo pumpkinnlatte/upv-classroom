@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
@@ -15,6 +15,7 @@ import { useAuth } from './context/AuthContext';
 import AvisoDetail from './pages/detailPub/AvisoDetail';
 import NuevoClasePage from './pages/createPub/NuevoClasePage';
 import NuevoAlumnoPage from './pages/createPub/NuevoAlumnoPage';
+import { useClass } from "./context/ClassContext";
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -36,6 +37,7 @@ function TeacherRoute({ children }) {
   return isTeacher ? children : <Navigate to="/" />;
 }
 
+
 function AppContent() {
   const location = useLocation();
   const mostrarSectionBar = location.pathname.includes('/c/');
@@ -43,13 +45,19 @@ function AppContent() {
   const mostrarLogOut = location.pathname === '/';
   const tipoNavBar = location.pathname.includes('/t/');
   const { isTeacher, isLoading } = useAuth();
+  const { clearCurrentClass } = useClass();
 
   console.log("isTeacher", isTeacher);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    if (location.pathname == '/') {
+      clearCurrentClass();
+    }
 
+    if (location.pathname.includes('/a/')) {
+      clearCurrentClass();
+    }
+  }, [location]);
   return (
     <div className="App">
       {mostrarNavbar && <Navbar mostrarSectionBar={mostrarSectionBar} tipoNavBar={tipoNavBar} mostrarLogOut={mostrarLogOut}/>}
