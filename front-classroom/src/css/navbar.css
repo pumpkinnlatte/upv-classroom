@@ -55,18 +55,23 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-content: center;
     width: 100%;
     height: 100%;
     list-style-type: none; 
 }
 
 .section-link {
+    display: flex;
+    align-items: center;
+    height: 3rem;
     text-decoration: none;
+    font-size: 0.95rem;
     color: var(--outer-space);
-    padding: 0.8rem 1.5rem;
-    display: block;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    
 }
-
 
 .section-link:visited {
     color: var(--outer-space);

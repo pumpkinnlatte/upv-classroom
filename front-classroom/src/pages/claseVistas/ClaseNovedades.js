@@ -45,18 +45,18 @@ function ClaseNovedades({isTeacher}) {
             <div className="center">
                 <div className="center-title">
                     <div className="title-description">
-                        <h2>{currentClass.nombre_clase}</h2>
+                        <h1>{currentClass.nombre_clase}</h1>
                         <span>{currentClass.descripcion_clase}</span>
                     </div>
                 </div>
                 <div className="center-body">
                     {isTeacher && (
                         <div className="center-left">
-                            <AvisoForm onSuccess={reloadPublications} />
                             <div className="code-data">
                                 <span>Código de la clase</span>
                                 <h3>{currentClass.codigo_grupo}</h3>
                             </div>
+                            <AvisoForm onSuccess={reloadPublications} />
                         </div>
                     )}
 

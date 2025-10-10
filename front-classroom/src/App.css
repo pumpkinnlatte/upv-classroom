@@ -24,7 +24,7 @@
   flex-direction: column;
   justify-content: flex-end;
   width: auto;
-  height: 12rem;
+  height: 16rem;
   border-radius: 1rem;
   gap: 0.6rem;
   padding: 1.5rem;
@@ -32,8 +32,7 @@
   background-color: var(--tufus-blue);
 }
 
-.center-title .title-description * {
-  color: white;
+.center-title .title-description span {
   font-weight: 400;
 
 }
@@ -43,6 +42,10 @@
   flex-direction: column;
   justify-content: left;    
   gap: 0.6rem;
+}
+
+.center-title .title-description *{
+  color: white;
 }
 
 .center-body {

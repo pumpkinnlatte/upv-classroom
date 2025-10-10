@@ -99,7 +99,7 @@ function SectionBar({ classId }) {
         <div className="section-bar">
             <ul className="section-options">
                 <li className={`section-option ${isSelected('/novedades') ? 'selected' : ''}`}>
-                    <Link to={`/c/${classId}/novedades`} className="section-link">Clase</Link>
+                    <Link to={`/c/${classId}/novedades`} className="section-link">Novedades</Link>
                 </li>
                 <li className={`section-option ${isSelected('/trabajo') ? 'selected' : ''}`}>
                     <Link to={`/c/${classId}/trabajo`} className="section-link">Tareas</Link>
