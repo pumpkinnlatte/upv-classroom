@@ -53,7 +53,7 @@ function ClaseNovedades({isTeacher}) {
                     {isTeacher && (
                         <div className="center-left">
                             <div className="code-data">
-                                <span>Código de la clase</span>
+                                <label>Código de la clase</label>
                                 <h3>{currentClass.codigo_grupo}</h3>
                             </div>
                             <AvisoForm onSuccess={reloadPublications} />

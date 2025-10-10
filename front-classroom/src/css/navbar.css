@@ -36,6 +36,10 @@
     margin: 0.5rem;
 }
 
+.class-carrera span {
+    font-weight: 400;
+}
+
 .nom{
     color: var(--outer-space);
 }

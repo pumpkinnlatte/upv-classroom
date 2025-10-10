@@ -102,7 +102,7 @@ function SectionBar({ classId }) {
                     <Link to={`/c/${classId}/novedades`} className="section-link">Novedades</Link>
                 </li>
                 <li className={`section-option ${isSelected('/trabajo') ? 'selected' : ''}`}>
-                    <Link to={`/c/${classId}/trabajo`} className="section-link">Tareas</Link>
+                    <Link to={`/c/${classId}/trabajo`} className="section-link">Trabajo en Clase</Link>
                 </li>
                 <li className={`section-option ${isSelected('/personas') ? 'selected' : ''}`}>
                     <Link to={`/c/${classId}/personas`} className="section-link">Personas</Link>
