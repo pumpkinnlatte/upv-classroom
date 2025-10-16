@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { useClass } from '../../context/ClassContext';
 import { usePublications } from '../../hooks/usePublications';
 import "../../css/claseNovedades.css"
+import AnuncioAlgoItem from "../../components/AnunciaAlgoItem";
 
 function ClaseNovedades({isTeacher}) {
     const { currentClass } = useClass();
@@ -61,6 +62,7 @@ function ClaseNovedades({isTeacher}) {
                     )}
 
                     <div className="center-right">
+                        <AnuncioAlgoItem classId={currentClass.clase_id} />
                         {publications.map((pub) => (
                             <PublicationItem 
                                 key={getPublicationKey(pub)}

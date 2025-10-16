@@ -356,3 +356,8 @@ select:disabled {
   text-decoration: underline;
 }
 
+
+.s-hver:hover {
+  color: var(--raisin-black);
+}
+

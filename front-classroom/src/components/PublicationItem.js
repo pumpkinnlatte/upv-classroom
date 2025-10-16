@@ -31,28 +31,32 @@ function PublicationItem({tipoPublicacion, pubData, nombreProfesor, classId}) {
     };
 
     return (
-        <div 
+        <div
             className="publication-item" 
             onClick={handleClick}
             style={{ cursor: 'pointer' }}
         >
-            <div className="publication-left">
-                <div className="publication-icon">
-                    <img src={icon} alt="user icon" width={24}/>
+            <div className="publication-header">
+                <div className="publication-left">
+                    <div className="publication-icon">
+                        <img src={icon} alt="user icon" width={24}/>
+                    </div>
+                </div>
+
+                <div className="publication-content">
+                    <span className="publication-title">
+                        {nombreProfesor}{inter}: {pubData.titulo}
+                    </span>
+                    <p className="publication-date">{formatDate(pubData.date)}</p>
+                    
                 </div>
             </div>
 
-            <div className="publication-content">
-                <span className="publication-title">
-                    {nombreProfesor}{inter}: {pubData.titulo}
-                </span>
-                <p className="publication-date">{formatDate(pubData.date)}</p>
-                {tipoPublicacion === "aviso" ? 
+            {tipoPublicacion === "aviso" ? 
                     <div className="publication-text">
                         <p>{pubData.descripcion_aviso}</p>
                     </div> : null
                 }
-            </div>
         </div>
     );
 }
