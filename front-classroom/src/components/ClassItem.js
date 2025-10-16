@@ -13,12 +13,15 @@ function ClassItem({ classData }) {
 
     return (
         <div className="class-item" onClick={handleClick}>
-            <div className="class-item-header">
-                <div className="ih-wrapp">
-                    <h2>{classData.nombre_clase}</h2>
-                    <p>{classData.carrera}</p>
+            <div className="class-item-header blue-i">
+                <div className="ih-wrapp alice-blue-i">
+                    {classData.nombre_clase}
                 </div>
-                <span>{classData.nombre_profesor}</span> 
+                <span className="alice-blue">{classData.carrera}</span>
+                <p className="alice-blue">{classData.nombre_profesor}</p> 
+            </div>
+            <div className="class-space">
+
             </div>
             <div className="class-item-footer">
                 <button className="btn">Ver Clase</button>
