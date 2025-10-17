@@ -50,7 +50,7 @@ function PublicationItem({tipoPublicacion, pubData, nombreProfesor, classId}) {
 
                 <div className="publication-content">
                     <span className="publication-title">
-                        {nombreProfesor}{inter}: {pubData.titulo}
+                        {nombreProfesor} {inter}: {pubData.titulo}
                     </span>
                     <p className="publication-date">{formatDate(pubData.date)}</p>
                     

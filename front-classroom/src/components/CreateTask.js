@@ -9,9 +9,7 @@ const CreateTask = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const user = jwtDecode(token);
-      console.log("Task created by:", user.name);
     }
-    console.log("Task:", task);
   };
 
   return (

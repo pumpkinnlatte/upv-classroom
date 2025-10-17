@@ -2,8 +2,6 @@ import React from "react";
 
 export const AlumnoFormLeft = ({ formData, handleInputChange, handleSubmit, students }) => {
 
-    console.log("Estudiantes desde el form", students);
-
     return(
         <div className="tema-wrapper">
             <div className="left-form">
