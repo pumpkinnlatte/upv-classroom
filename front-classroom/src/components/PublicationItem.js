@@ -7,6 +7,7 @@ function PublicationItem({tipoPublicacion, pubData, nombreProfesor, classId}) {
     let icon = "";
     let inter = "";
     let linkTo = "";
+    let cursor ="pointer";
 
     if(tipoPublicacion === "material"){
         inter = "publicó nuevo material";
@@ -24,17 +25,21 @@ function PublicationItem({tipoPublicacion, pubData, nombreProfesor, classId}) {
         inter = "";
         icon = "/svg/icons8-notification.svg";
         linkTo = `/t/${classId}/aviso/${pubData.aviso_id}`;
+        cursor = "default"
     }
 
     const handleClick = () => {
-        navigate(linkTo);
+        if(tipoPublicacion !== "aviso"){
+            navigate(linkTo);
+        }
+        
     };
 
     return (
         <div
             className="publication-item" 
             onClick={handleClick}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: cursor }}
         >
             <div className="publication-header">
                 <div className="publication-left">

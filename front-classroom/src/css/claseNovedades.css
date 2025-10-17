@@ -84,13 +84,11 @@
 }
 
 .publication-text{
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
-    padding-bottom: 0.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
 }
 
 .publication-text p{
-    color: var(--outer-space);
-    font-weight: 500;
     margin-top: 0.5rem;
 }
