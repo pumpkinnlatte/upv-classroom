@@ -18,7 +18,6 @@ function ClasePersonas ({isTeacher}){
         const fetchStudents = async () => {
             try {
                 const response = await getStudents(currentClass.clase_id);
-                console.log("claseId:", currentClass.clase_id);
                 setStudents(response);
             } catch (error) {
                 console.error('Error fetching students:', error);

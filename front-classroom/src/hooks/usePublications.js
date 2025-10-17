@@ -11,7 +11,6 @@ export const usePublications = (classId) => {
     try {
         setLoading(true);
         const data = await getAllPublications(classId);
-        console.log(data);
         setPublications(data);
     } catch (err) {
         setError(err.message);

@@ -30,9 +30,6 @@ function ClaseNovedades({isTeacher}) {
     if (!currentClass) {
         return <Navigate to="/" />;
     }
-
-    console.log("currentClass", currentClass);
-
     if (loading) {
         return;
     }
@@ -57,12 +54,13 @@ function ClaseNovedades({isTeacher}) {
                                 <label>Código de la clase</label>
                                 <h3>{currentClass.codigo_grupo}</h3>
                             </div>
-                            <AvisoForm onSuccess={reloadPublications} />
                         </div>
                     )}
 
                     <div className="center-right">
-                        <AnuncioAlgoItem classId={currentClass.clase_id} />
+                        {isTeacher && (
+                            <AnuncioAlgoItem classId={currentClass.clase_id} onSuccess={reloadPublications} />
+                        )}
                         {publications.map((pub) => (
                             <PublicationItem 
                                 key={getPublicationKey(pub)}

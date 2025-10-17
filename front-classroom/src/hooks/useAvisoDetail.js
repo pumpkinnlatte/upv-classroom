@@ -12,14 +12,12 @@ export const useAvisoDetail = (avisoId) => {
             try {
                 const avisoData = await getAvisoById(avisoId);
 
-                console.log("Aviso Data:", avisoData);
-
+      
                 setAviso(avisoData);
 
                 const files = await getArchivos(avisoId, "aviso");
                 setAvisoFiles(files);
             } catch (error) {
-                console.error("Error fetching aviso details:", error);
                 setError(error.message);
             } finally {
                 setLoading(false);

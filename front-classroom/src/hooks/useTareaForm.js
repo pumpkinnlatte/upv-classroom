@@ -23,8 +23,6 @@ export const useTareaForm = (claseId) => {
             try {
                 const topicsData = await getTopics(claseId);
 
-                console.log("topicsData", topicsData);
-
                 setTopics(topicsData);
             } catch (error) {
                 console.error('Error al obtener los temas:', error);

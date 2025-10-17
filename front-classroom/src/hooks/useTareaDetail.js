@@ -23,8 +23,6 @@ export const useTareaDetail = (tareaId, isTeacher) => {
 
                 const responses = await Promise.all(fetchPromises);
 
-                console.log(responses[0]); // Debug log
-                
                 setTarea(responses[0]);
                 setArchivos(responses[1]);
                 if (isTeacher) {

@@ -17,7 +17,7 @@ function WorkItem({tipoTrabajo, workData, nombreProfesor, classId}) {
     if(tipoTrabajo === "tarea"){
 
         icon = "/svg/icons8-brief.svg";
-        dateMessage = "Fecha de entrega: ";
+        dateMessage = "Fecha límite: ";
         linkTo = `/t/${classId}/tarea/${workData.tarea_id}`;
     }
 

@@ -47,8 +47,6 @@ function AppContent() {
   const { isTeacher, isLoading } = useAuth();
   const { clearCurrentClass } = useClass();
 
-  console.log("isTeacher", isTeacher);
-
   useEffect(() => {
     if (location.pathname == '/') {
       clearCurrentClass();

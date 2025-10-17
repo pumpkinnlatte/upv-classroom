@@ -22,7 +22,6 @@ function TareaDetail ({isTeacher}){
                 try {
                     const data = await getEntregasByTarea(tareaId);
 
-                    console.log("data", data);
                     setStudentEntrega(data);
                 } catch (error) {
                     console.error("Error fetching student submission:", error);

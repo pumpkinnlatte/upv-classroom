@@ -1,22 +1,25 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import AvisoForm from "../forms/AvisoForm";
 
-function AnuncioAlgoItem({classId}) {
-    const navigate = useNavigate();
+function AnuncioAlgoItem({ classId, onSuccess }) {
+    const [expanded, setExpanded] = useState(false);
     let icon = "/svg/icons8-user.svg";
-    let linkTo = "";
-    //Desplegar el formulario para crear un nuevo anuncio
-    const handleClick = () => {
-        navigate(linkTo);
+
+    // Toggle form visibility
+    const handleClick = (e) => {
+        // Prevent clicks coming from inside the form (like buttons) from re-toggling
+        if (e && e.target && e.target.closest('.aviso-form')) return;
+        setExpanded((v) => !v);
+    };
+
+    const handleSuccess = () => {
+        setExpanded(false);
+        if (typeof onSuccess === 'function') onSuccess();
     };
 
     return (
-        <div 
-            className="publication-item" 
-            onClick={handleClick}
-            style={{ cursor: 'pointer' }}
-        >
-            <div className="publication-header">
+        <div className="publication-item" style={{ cursor: 'pointer' }}>
+            <div className="publication-header" onClick={handleClick}>
                 <div className="publication-left">
                     <div className="publication-icon">
                         <img src={icon} alt="user icon" width={24}/>
@@ -24,9 +27,15 @@ function AnuncioAlgoItem({classId}) {
                 </div>
 
                 <div className="publication-content">
-                        <p className="s-hver">Anuncia algo a tu clase.</p>
+                    <p className="s-hver">Anuncia algo a tu clase.</p>
                 </div>
             </div>
+
+            {expanded && (
+                <div className="publication-form">
+                    <AvisoForm onSuccess={handleSuccess} />
+                </div>
+            )}
         </div>
     );
 }

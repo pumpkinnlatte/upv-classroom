@@ -28,9 +28,6 @@ function ClaseTrabajo ({isTeacher}){
         ...materials.map(material => ({ ...material, tipoTrabajo: 'material', titulo: material.titulo_material }))
     ];
 
-    console.log(worksArray);
-
-
     return(
         <div className="content">
             <div className="center">

@@ -7,7 +7,6 @@ import "../../css/nuevoContentPage.css"
 function NuevoAlumnoPage (){
     const { currentClass } = useClass();
 
-    console.log("Clase actual:", currentClass.clase_id);
     const { formData, 
             handleInputChange, 
             handleSubmit,
