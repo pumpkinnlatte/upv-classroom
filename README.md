@@ -1,9 +1,12 @@
-
 # upv-classroom
 
 upv-classroom es un clon educativo de Google Classroom: frontend en React y backend en Node.js que soporta administración de clases, anuncios, materiales, tareas y entregas. Incluye un volcado SQL (upv_classroom.sql) con estructura y datos de ejemplo para MariaDB/MySQL.
 
 Clon funcional de Google Classroom con pila JavaScript (React + Node.js + MariaDB), listo para demostración local con datos reales y visualizaciones.
+
+## Disclaimer
+
+Proyecto educativo e independiente, inspirado en Google Classroom. No está afiliado ni autorizado por Google. Todas las marcas registradas pertenecen a sus propietarios respectivos.
 
 
 ## Estructura del proyecto
