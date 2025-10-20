@@ -5,7 +5,8 @@
 .content {
   display: flex;
   flex-direction: row;
-  width: 100%; /* cambiado de auto a 100% */
+  width: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
