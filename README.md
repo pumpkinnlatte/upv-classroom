@@ -2,130 +2,96 @@
 
 Este proyecto es un clon de Google Classroom que consta de un frontend en React y un backend en Node.js.
 
+Se incluyen instrucciones para desplegar localmente usando MariaDB 
+
 ## Estructura del Proyecto
 
-El proyecto está dividido en dos carpetas principales:
 - `back-classroom/` - Backend en Node.js
-- `new-front-classroom/` - Frontend en React
+- `front-classroom/` - Frontend en React
+- `upv_classroom.sql` - Volcado SQL para crear la base de datos
+
 
 ## Requisitos Previos
 
 - Node.js (v16 o superior)
-- MySQL (v8 o superior)
-- npm o yarn
+- npm (o yarn)
+- MariaDB / MySQL (si no vas a usar Docker)
 
-## Configuración Inicial
+---
 
-### Backend
 
-1. Navega a la carpeta del backend:
+## Screenshots
+
+![Página principal](images//pagina_principal.png)
+
+### Vista de clase - stream
+![Class dashboard - stream](images//class_dashboard_stream.png)
+
+### Vista de clase - classmates
+![Class dashboard - classmates](images//class_dashboard_classmates.png)
+
+### Vista de clase - classwork
+![Class dashboard - classwork](images//class_dashboard_classwork.png)
+
+### Crear anuncio
+![Create announcement](images//create_announcement.png)
+
+### Nueva tarea
+![New homework](images//new_homework.png)
+
+### Calificar entregas
+![Grade submits](images//grade_submits.png)
+```
+
+---
+## 1) Clonar el repositorio
+
 ```bash
-cd back-classroom
+git clone https://github.com/pumpkinnlatte/upv-classroom.git
+cd upv-classroom
 ```
 
-2. Instala las dependencias:
-```bash
-npm install
-```
+---
 
-3. Crea un archivo `config.json` en la carpeta `src/` con la siguiente estructura:
-```json
-{
-  "db": {
-    "host": "localhost",
-    "user": "tu_usuario",
-    "password": "tu_password",
-    "database": "nombre_base_datos"
-  },
-  "jwt": {
-    "secret": "tu_secret_key",
-    "refreshSecret": "tu_refresh_secret_key"
-  },
-  "port": 3001
-}
-```
+## 2) Instalar dependencias
 
-4. Crea las carpetas necesarias para almacenamiento:
-```bash
-mkdir uploads
-mkdir storage
-```
+Usando npm workspaces:
 
-### Frontend
-
-1. Navega a la carpeta del frontend:
-```bash
-cd new-front-classroom
-```
-
-2. Instala las dependencias:
 ```bash
 npm install
 ```
 
-3. Crea un archivo `config.json` en la carpeta `src/` con la siguiente estructura:
-```json
-{
-  "api_route": "http://localhost:3001/api"
-}
-```
+Si no, instala manualmente en cada carpeta:
 
-## Ejecución del Proyecto
-
-### Backend
-
-1. Inicia el servidor backend:
+Backend:
 ```bash
 cd back-classroom
-npm start
+npm install
 ```
-El servidor se iniciará en `http://localhost:3001`
 
-### Frontend
-
-1. En otra terminal, inicia el servidor de desarrollo de React:
+Frontend:
 ```bash
-cd new-front-classroom
-npm start
-```
-La aplicación se abrirá en `http://localhost:3000`
-
-## Características Principales
-
-- Autenticación de usuarios (profesores y alumnos)
-- Creación y gestión de clases
-- Publicación de anuncios
-- Gestión de tareas y materiales
-- Calificación de entregas
-- Sistema de archivos adjuntos
-- Manejo de temas por clase
-
-## Estructura de Carpetas Frontend
-
-```
-new-front-classroom/
-├── public/
-├── src/
-│   ├── components/     # Componentes reutilizables
-│   ├── context/        # Contextos de React
-│   ├── css/           # Estilos
-│   ├── forms/         # Componentes de formularios
-│   ├── hooks/         # Custom hooks
-│   ├── pages/         # Páginas principales
-│   ├── services/      # Servicios API
-│   └── config.json    # Configuración
+cd ../front-classroom   # o new-front-classroom si tu repo lo usa
+npm install
 ```
 
-## Estructura de Carpetas Backend
+## 3) Crear / importar la base de datos
 
+El repositorio contiene un volcado SQL `upv_classroom.sql`.
+
+Opción A — Importar con cliente MySQL/MariaDB local
+1. Crea la base de datos:
+```bash
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS \`upv_classroom\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
-back-classroom/
-├── src/
-│   ├── data-access/   # Capa de acceso a datos
-│   ├── middlewares/   # Middlewares
-│   ├── routes/        # Rutas API
-│   ├── services/      # Lógica de negocio
-│   └── config.json    # Configuración
-├── storage/           # Almacenamiento de archivos
-└── uploads/          # Carpeta temporal de uploads
+
+2. Importa el volcado:
+```bash
+mysql -u root -p upv_classroom < ./upv_classroom.sql
+```
+---
+
+## 4) Iniciar backend y frontend
+```bash
+npm run start --workspace front-classroom
 ```

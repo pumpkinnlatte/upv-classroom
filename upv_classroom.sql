@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2025 a las 15:56:50
+-- Tiempo de generación: 20-10-2025 a las 05:17:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,6 +32,14 @@ CREATE TABLE `alumnos_clases` (
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `alumnos_clases`
+--
+
+INSERT INTO `alumnos_clases` (`clase_id`, `usuario_id`) VALUES
+(12, 9),
+(13, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +54,17 @@ CREATE TABLE `archivos` (
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `archivos`
+--
+
+INSERT INTO `archivos` (`archivo_id`, `nombre_original`, `fecha_creacion`, `nombre_en_storage`, `usuario_id`) VALUES
+(45, 'Basic SQL Concepts.pdf', '2025-10-08 09:40:42', '1759938042763-Basic SQL Concepts.pdf', 10),
+(46, 'Basic SQL Concepts.pdf', '2025-10-08 09:46:15', '1759938375047-Basic SQL Concepts.pdf', 10),
+(47, 'POO Fundamentos.pdf', '2025-10-15 20:04:43', '1760580283166-POO Fundamentos.pdf', 10),
+(48, 'caso_03.png', '2025-10-17 09:51:53', '1760716313733-caso_03.png', 10),
+(49, 'Homework.pdf', '2025-10-19 20:20:25', '1760926825245-Homework.pdf', 9);
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +76,17 @@ CREATE TABLE `archivos_publicaciones` (
   `publicacion_id` int(11) NOT NULL,
   `tipo_publicacion` enum('aviso','material','tarea','entrega') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `archivos_publicaciones`
+--
+
+INSERT INTO `archivos_publicaciones` (`archivo_id`, `publicacion_id`, `tipo_publicacion`) VALUES
+(45, 27, 'tarea'),
+(46, 36, 'material'),
+(47, 44, 'aviso'),
+(48, 45, 'aviso'),
+(49, 12, 'entrega');
 
 -- --------------------------------------------------------
 
@@ -72,6 +102,15 @@ CREATE TABLE `avisos` (
   `fecha_publicacion` datetime NOT NULL DEFAULT current_timestamp(),
   `has_file` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `avisos`
+--
+
+INSERT INTO `avisos` (`aviso_id`, `clase_id`, `titulo_aviso`, `descripcion_aviso`, `fecha_publicacion`, `has_file`) VALUES
+(43, 12, 'Welcome to Database Fundamentals! Let\'s Get Started.', 'Hello everyone,\n\nWelcome to CMPT 250: Database Fundamentals!\n\nMy name is Jhonn Professor, and I will be your instructor for this course. I\'m excited to guide you through the essential world of databases, a core skill for any professional in the tech industry.\n\nThis course is designed to provide you with a solid foundation in database design, implementation, and management. We will move from the basic concepts of what data is and why we need databases, to designing robust data models with Entity-Relationship Diagrams (ERDs), and finally to mastering SQL to create, manipulate, and query data. Whether you plan to be a software developer, a data analyst, or a systems administrator, the skills you learn here will be invaluable.', '2025-10-08 09:27:17', 0),
+(44, 13, 'Bienvenidos al curso!', 'Chicos, bienvenidos al curso de Programación Orientada a Objetos', '2025-10-15 20:04:43', 1),
+(45, 13, 'Hola chiquillos', 'fskjksjfkssfs', '2025-10-17 09:51:53', 1);
 
 -- --------------------------------------------------------
 
@@ -94,8 +133,8 @@ CREATE TABLE `clases` (
 --
 
 INSERT INTO `clases` (`clase_id`, `nombre_clase`, `descripcion_clase`, `codigo_grupo`, `carrera`, `cuatrimestre`, `profesor_id`) VALUES
-(1, 'ClasePrueba01', 'Clase para probar insercion de clases 01', 'An56Kkze', 'Tecnologias de la Información', 4, 1),
-(2, 'ClasePrueba02', 'Clase para probar insercion de clases 02', 'efgh123', 'Mecatronica', 8, 1);
+(12, 'Database Fundamentals', 'This course introduces students to the field of database management systems (DBMS), providing the theoretical foundations and practical skills required to design, build, manipulate, and administer databases in an efficient, secure, and scalable manner.', '4K0bykJ', 'Tecnologias de la Información', 1, 10),
+(13, 'Object-Oriented Programming (OOP)', 'This course introduces students to the fundamental concepts and principles of Object-Oriented Programming (OOP), a programming paradigm centered on the use of objects and classes to design and build modular, reusable, and efficient software.', 'zz29YJl', '', 3, 10);
 
 -- --------------------------------------------------------
 
@@ -113,6 +152,14 @@ CREATE TABLE `entregas` (
   `has_file` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `entregas`
+--
+
+INSERT INTO `entregas` (`entrega_id`, `tarea_id`, `alumno_id`, `fecha_entrega`, `estado`, `calificacion`, `has_file`) VALUES
+(11, 28, 9, '2025-10-15 20:41:28', 'entregado', 0.00, 0),
+(12, 27, 9, '2025-10-19 20:20:25', 'entregado', 0.00, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +175,13 @@ CREATE TABLE `materiales` (
   `clase_id` int(11) NOT NULL,
   `has_file` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `materiales`
+--
+
+INSERT INTO `materiales` (`material_id`, `titulo_material`, `descripcion_material`, `fecha_publicacion`, `tema_id`, `clase_id`, `has_file`) VALUES
+(36, 'Introduction to SQL Commands', 'Dear students,\n\nThis week, we will begin exploring the foundations of Structured Query Language (SQL) — the language used to create, manage, and interact with databases.\n\nA new learning document has been uploaded:\n👉 “Basic SQL Concepts”\n\nThis material will help you understand how to:\n\nCreate databases and tables using appropriate data types.\n\nInsert data into tables.\n\nUse SELECT, WHERE, ORDER BY, and GROUP BY clauses.\n\nApply basic aggregate functions (COUNT, AVG, MAX, MIN, SUM).\n\nWrite simple joins between two tables.\n\nPlease read the document carefully and practice the examples using your preferred SQL environment (such as MySQL Workbench, SQLite, or PostgreSQL).\nYou will need these concepts for the upcoming Assignment 1: Introduction to SQL Queries.\n\nIf you have questions or need clarification, feel free to ask during our next class or post your doubts in the discussion forum.', '2025-10-08 09:46:15', 14, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +298,42 @@ INSERT INTO `refresh_tokens` (`refresh_token`, `usuario_id`, `fecha_generado`, `
 ('01JSETFC97FPK1XJ2635FE1Z03', 3, '2025-04-22 07:19:53', '2025-04-23 07:19:53', 1),
 ('01JSETT99F4XBHC8ATCR45WZQX', 1, '2025-04-22 07:25:50', '2025-04-23 07:25:50', 1),
 ('01JSEV14PR2GFYEBE06GQNGNDZ', 3, '2025-04-22 07:29:35', '2025-04-23 07:29:35', 1),
-('01JSEVA5KWRP3ZB8K3YJ3F5F1V', 1, '2025-04-22 07:34:31', '2025-04-23 07:34:31', 1);
+('01JSEVA5KWRP3ZB8K3YJ3F5F1V', 1, '2025-04-22 07:34:31', '2025-04-23 07:34:31', 1),
+('01JSMXGM0DH8N1HHF53RQPTR83', 1, '2025-04-24 16:08:26', '2025-04-25 16:08:26', 1),
+('01JSMXJ36T044PBTGGEA2YQ7F4', 4, '2025-04-24 16:09:14', '2025-04-25 16:09:14', 1),
+('01JSMXJHXQ719SSTX8EAF0XXX7', 1, '2025-04-24 16:09:29', '2025-04-25 16:09:29', 1),
+('01JSMXM291YSW7Q1HJRPGNF540', 4, '2025-04-24 16:10:19', '2025-04-25 16:10:19', 1),
+('01JSMXMP0Y60MJFAJFC6X1FACH', 1, '2025-04-24 16:10:39', '2025-04-25 16:10:39', 1),
+('01JSMXNF61VV4FSVDXYRFN0M5W', 4, '2025-04-24 16:11:05', '2025-04-25 16:11:05', 1),
+('01JSMXP84K4ZCPDXPWJQVQSM84', 1, '2025-04-24 16:11:30', '2025-04-25 16:11:30', 1),
+('01JSMXQHX06ZMQD1AXYGMFYMSG', 2, '2025-04-24 16:12:13', '2025-04-25 16:12:13', 1),
+('01JSMXRWW0PN9K0F3T657A63FX', 3, '2025-04-24 16:12:57', '2025-04-25 16:12:57', 1),
+('01JXAVZKNY4HJKC60XXCBJRVJT', 3, '2025-06-09 11:32:03', '2025-06-10 11:32:03', 1),
+('01K725FP7FP16C2QBX2RSE4M02', 10, '2025-10-08 09:01:55', '2025-10-09 09:01:55', 1),
+('01K727R269M6W15F79QB9MJ9DC', 9, '2025-10-08 09:41:27', '2025-10-09 09:41:27', 1),
+('01K727XPVA5SJFZEEDTYC3PT7M', 10, '2025-10-08 09:44:32', '2025-10-09 09:44:32', 1),
+('01K74NN6ZPKWFFT19D3SMYD1AH', 10, '2025-10-09 08:23:02', '2025-10-10 08:23:02', 1),
+('01K7791X9NQB1Q14JMAGEQDSHE', 10, '2025-10-10 08:40:30', '2025-10-11 08:40:30', 1),
+('01K77JGSDH9VNX9587XNZQKDH3', 10, '2025-10-10 11:25:55', '2025-10-11 11:25:55', 1),
+('01K77KSAS83Z8G34PMVTJ0K38N', 10, '2025-10-10 11:48:03', '2025-10-11 11:48:03', 1),
+('01K77M9KVH8BABT4XG34HTYKSX', 10, '2025-10-10 11:56:57', '2025-10-11 11:56:57', 1),
+('01K7N8T2FDCA7MNDX7FWB8KN0X', 10, '2025-10-15 19:05:35', '2025-10-16 19:05:35', 1),
+('01K7NE9D9J6KY0FBXQZCQ8SY8C', 9, '2025-10-15 20:41:21', '2025-10-16 20:41:21', 1),
+('01K7NEA3951G2GM3YKTMW40RGZ', 10, '2025-10-15 20:41:43', '2025-10-16 20:41:43', 1),
+('01K7PKMWW2VZBJSVF44PNC7Z92', 10, '2025-10-16 07:34:14', '2025-10-17 07:34:14', 1),
+('01K7PZTEASHTG8Y0XCFS2FJZ18', 10, '2025-10-16 11:06:59', '2025-10-17 11:06:59', 1),
+('01K7PZYP6JMYXSNS33PYPHD6NF', 9, '2025-10-16 11:09:18', '2025-10-17 11:09:18', 1),
+('01K7S9SMQFCFQKNDBPMYBJAY12', 10, '2025-10-17 08:39:47', '2025-10-18 08:39:47', 1),
+('01K7SDXZVT86Q2BASKEMM3X325', 9, '2025-10-17 09:52:04', '2025-10-18 09:52:04', 1),
+('01K7SF3WN1VQ2V28WF6GW0XBHW', 10, '2025-10-17 10:12:46', '2025-10-18 10:12:46', 1),
+('01K7SF7JSYX3E0J43GHGEC3AP6', 9, '2025-10-17 10:14:47', '2025-10-18 10:14:47', 1),
+('01K7SFA6KKDS3G6AJ3NNCTQJ9C', 9, '2025-10-17 10:16:13', '2025-10-18 10:16:13', 1),
+('01K7SFD67P9E5ESGYX5AG5KT21', 9, '2025-10-17 10:17:51', '2025-10-18 10:17:51', 1),
+('01K7SFEM0NS641Q95SPR07X915', 10, '2025-10-17 10:18:38', '2025-10-18 10:18:38', 1),
+('01K7SFQZM7MY7W63YPNHT1BPGQ', 10, '2025-10-17 10:23:45', '2025-10-18 10:23:45', 1),
+('01K7ZPKBAFNNPQQ87VK2P7AAK5', 10, '2025-10-19 20:18:59', '2025-10-20 20:18:59', 1),
+('01K7ZPMQE8J38PEM7MNS4EZK2G', 9, '2025-10-19 20:19:44', '2025-10-20 20:19:44', 1),
+('01K7ZPPBZYSBK74M1BWC9AZ3WG', 10, '2025-10-19 20:20:38', '2025-10-20 20:20:38', 1);
 
 -- --------------------------------------------------------
 
@@ -264,6 +353,14 @@ CREATE TABLE `tareas` (
   `has_file` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`tarea_id`, `titulo_tarea`, `descripcion_tarea`, `puntos_max`, `fecha_publicacion`, `fecha_limite`, `tema_id`, `clase_id`, `has_file`) VALUES
+(27, 'Introduction to SQL Queries', 'In this assignment, you will explore the fundamentals of Structured Query Language (SQL) by creating and manipulating a simple relational database. Your task is to design a small database schema, populate it with sample data, and perform a set of basic queries to retrieve, filter, and organize information.\r\n\r\nYou should demonstrate your understanding of:\r\n\r\nCreating databases and tables using appropriate data types.\r\n\r\nInserting data into tables.\r\n\r\nUsing SELECT, WHERE, ORDER BY, and GROUP BY clauses.\r\n\r\nApplying basic aggregate functions (COUNT, AVG, MAX, MIN, SUM).\r\n\r\nWriting simple joins between two tables.\r\n\r\nDeliverables:\r\n\r\nA .sql file containing all commands used in your database creation and queries.\r\n\r\nA brief report (1 page) explaining your database structure and summarizing the results of your queries.\r\n\r\nSubmission Format:\r\nUpload both files (.sql and .pdf or .docx) to the course platform.', 100, '2025-10-08 09:40:42', '2025-10-22 23:59:00', 14, 12, 1),
+(28, 'Tarea de Programación Orientada a Objetos', 'Primera tarea para programación orientada a objetos', 100, '2025-10-15 20:41:10', '2025-10-16 20:37:00', 0, 13, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -276,6 +373,13 @@ CREATE TABLE `temas` (
   `descripcion_tema` text DEFAULT NULL,
   `clase_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `temas`
+--
+
+INSERT INTO `temas` (`tema_id`, `nombre_tema`, `descripcion_tema`, `clase_id`) VALUES
+(14, 'Unit 1: SQL', 'SQL first approach', 12);
 
 -- --------------------------------------------------------
 
@@ -297,10 +401,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`usuario_id`, `email`, `matricula`, `nombre`, `password`, `rol`) VALUES
-(1, 'profesor01@upv.edu.mx', NULL, 'Luis Roberto', 'profesor01', 'profesor'),
-(2, 'profesor02@upv.edu.mx', NULL, 'Adriana Mota', 'profesor02', 'profesor'),
-(3, '2230343@upv.edu.mx', '2230343', 'Angel Ivan Cabrera Rojas', 'CABRERA298', 'alumno'),
-(4, '2230404@upv.edu.mx', '2230404', 'Rodrigo Santamaria Moreno', 'gogi1234', 'alumno');
+(9, 'studentuser@university.com', '2230545', 'Jhonn Student ', 'password123', 'alumno'),
+(10, 'professoruser@university.com', NULL, 'Stephen Professor', 'password123', 'profesor');
 
 --
 -- Índices para tablas volcadas
@@ -394,49 +496,49 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `archivos`
 --
 ALTER TABLE `archivos`
-  MODIFY `archivo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `archivo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `avisos`
 --
 ALTER TABLE `avisos`
-  MODIFY `aviso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `aviso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `clases`
 --
 ALTER TABLE `clases`
-  MODIFY `clase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `clase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `entregas`
 --
 ALTER TABLE `entregas`
-  MODIFY `entrega_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `entrega_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `materiales`
 --
 ALTER TABLE `materiales`
-  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `tarea_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `tarea_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
