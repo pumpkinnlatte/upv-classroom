@@ -1,4 +1,4 @@
-```markdown
+
 # UPV Classroom
 
 UPV Classroom is an educational platform modeled after Google Classroom, featuring a React-based frontend and a Node.js backend. It supports class administration, announcements, course materials, assignments, and student submissions. The repository includes an SQL dump file (`upv_classroom.sql`) with the database schema and sample data compatible with MariaDB or MySQL.
