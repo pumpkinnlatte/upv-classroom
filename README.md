@@ -1,114 +1,119 @@
-# upv-classroom
+```markdown
+# UPV Classroom
 
-upv-classroom es un clon educativo de Google Classroom: frontend en React y backend en Node.js que soporta administración de clases, anuncios, materiales, tareas y entregas. Incluye un volcado SQL (upv_classroom.sql) con estructura y datos de ejemplo para MariaDB/MySQL.
+UPV Classroom is an educational platform modeled after Google Classroom, featuring a React-based frontend and a Node.js backend. It supports class administration, announcements, course materials, assignments, and student submissions. The repository includes an SQL dump file (`upv_classroom.sql`) with the database schema and sample data compatible with MariaDB or MySQL.
 
+## Table of Contents
+
+- [Disclaimer](#disclaimer)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Screenshots](#screenshots)
+- [Installation](#installation)
+  - [1. Clone the Repository](#1-clone-the-repository)
+  - [2. Install Dependencies](#2-install-dependencies)
+  - [3. Create/Import the Database](#3-createimport-the-database)
+  - [4. Configuration](#4-configuration)
+  - [5. Start the Application](#5-start-the-application)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Disclaimer
 
-Proyecto educativo e independiente, inspirado en Google Classroom. No está afiliado ni autorizado por Google. Todas las marcas registradas pertenecen a sus propietarios respectivos.
+This is an independent educational project inspired by Google Classroom and is not affiliated with, endorsed by, or authorized by Google. All trademarks are the property of their respective owners.
 
+## Project Structure
 
-## Estructura del proyecto
+- `back-classroom/`: Contains the Node.js backend implementation.
+- `front-classroom/`: Contains the React frontend application.
+- `upv_classroom.sql`: SQL dump file for initializing the database schema and sample data.
 
-- `back-classroom/` — Backend en Node.js
-- `front-classroom/` — Frontend en React
-- `upv_classroom.sql` — Volcado SQL para crear la base de datos 
-## Requisitos previos
+## Prerequisites
 
-- Node.js v16+ (o superior)
-- npm
-- MariaDB / MySQL
+- Node.js (version 16 or higher)
+- npm (Node Package Manager)
+- MariaDB or MySQL database server
 
 ## Screenshots
 
-![Página principal](images/pagina_principal.png)
+### Main Interface
+![Main Page](images/pagina_principal.png "The application's landing page for users.")
 
-### Vista de clase - stream
-![Vista stream](images/class_dashboard_stream.png)
+### Class Views
+- **Stream View**: ![Stream View](images/class_dashboard_stream.png "Displays announcements and recent activity.")
+- **Classmates View**: ![Classmates View](images/class_dashboard_classmates.png "Lists enrolled participants.")
+- **Classwork View**: ![Classwork View](images/class_dashboard_classwork.png "Organizes assignments and materials.")
 
-### Vista de clase - classmates
-![Vista classmates](images/class_dashboard_classmates.png)
+### Content Creation and Management
+- **Create Announcement**: ![Create Announcement](images/create_announcement.png "Form for posting class announcements.")
+- **New Assignment**: ![New Assignment](images/new_homework.png "Interface for assigning tasks to students.")
+- **Grade Submissions**: ![Grade Submissions](images/grade_submits.png "Tool for reviewing and scoring student work.")
 
-### Vista de clase - classwork
-![Vista classwork](images/class_dashboard_classwork.png)
+## Installation
 
-### Crear anuncio
-![Crear anuncio](images/create_announcement.png)
-
-### Nueva tarea
-![Nueva tarea](images/new_homework.png)
-
-### Calificar entregas
-![Calificar entregas](images/grade_submits.png)
-
----
-
-## 1) Clonar el repositorio
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/pumpkinnlatte/upv-classroom.git
 cd upv-classroom
 ```
 
+### 2. Install Dependencies
 
-## 2) Instalar dependencias
-
-El repositorio está configurado con npm workspaces
+The repository utilizes npm workspaces for dependency management.
 
 ```bash
 npm install
 ```
 
-Si no deseas usar workspaces, instala en cada carpeta:
+If workspaces are not preferred, install dependencies separately:
 
-Backend:
-```bash
-cd back-classroom
-npm install
-```
+- Backend:
+  ```bash
+  cd back-classroom
+  npm install
+  ```
 
-Frontend:
-```bash
-cd ../front-classroom
-npm install
-```
+- Frontend:
+  ```bash
+  cd ../front-classroom
+  npm install
+  ```
 
-## 3) Crear / importar la base de datos
+### 3. Create/Import the Database
 
-El volcado SQL `upv_classroom.sql` viene incluido en el repositorio. Verifica su ubicación (raíz o `back-classroom/`).
+Locate the `upv_classroom.sql` file in the repository root or backend directory.
 
-### Importar con cliente MySQL/MariaDB local
+Using a local MySQL/MariaDB client:
 
-1. Crear la base de datos (si no existe):
-```bash
-mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS \`upv_classroom\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-```
+1. Create the database if it does not exist:
+   ```bash
+   mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS \`upv_classroom\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+   ```
 
-2. Importar el volcado:
-```bash 
-mysql -u root -p upv_classroom < ./upv_classroom.sql
-```
+2. Import the SQL dump:
+   ```bash
+   mysql -u root -p upv_classroom < ./upv_classroom.sql
+   ```
 
-## 4) Configuración
+### 4. Configuration
 
-> Importante: este proyecto NO usa `.env`. La configuración se lee desde `back-classroom/config.json`. Edita ese archivo para ajustar la conexión y los parámetros de encriptación/JWT.
+**Note:** This project does not use `.env` files. All settings are managed via `back-classroom/config.json`. Edit this file to configure database connections, JWT secrets, and other parameters.
 
-### Ruta del archivo de configuración a editar
-`back-classroom/config.json` 
-
-### Ejemplo de `back-classroom/config.json`
+Example `config.json`:
 ```json
 {
   "db": {
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "tu_password",
+    "password": "your_password",
     "database": "upv_classroom"
   },
   "jwt": {
-    "secret": "tu_jwt_secret",
-    "refreshSecret": "tu_refresh_secret"
+    "secret": "your_jwt_secret",
+    "refreshSecret": "your_refresh_secret"
   },
   "bcrypt": {
     "rounds": 10
@@ -117,34 +122,35 @@ mysql -u root -p upv_classroom < ./upv_classroom.sql
 }
 ```
 
-- `db.database`: cambia el nombre si importaste el volcado con un nombre distinto.
-- `db.user` / `db.password` / `db.host` / `db.port`: credenciales y host de tu instancia MariaDB/MySQL.
-- `bcrypt.rounds`: controla la dificultad del hash.
-- `jwt.secret` y `jwt.refreshSecret`: claves para firmar tokens JWT — mantenlas seguras.
+- Adjust `db` fields to match your database credentials.
+- Ensure JWT secrets are unique and secure; avoid committing them to version control in production environments.
+- The `bcrypt.rounds` value determines hashing complexity; higher values increase security but may impact performance.
 
+### 5. Start the Application
 
-## 5) Iniciar backend y frontend
-
-El proyecto está configurado para usar npm workspaces y tiene un script en la raíz para arrancar ambos, puedes iniciar desde la raíz con el script correspondiente:
+Using npm workspaces from the root directory:
 ```bash
 npm run start
 ```
 
-De otra forma, tambien se puede desplegar desde dos terminales.
+Alternatively, launch components separately in two terminals:
 
-**Terminal 1 — Backend:**
-```bash
-cd back-classroom
-npm start
-```
-El backend escuchará en el puerto configurado en `config.json` (ej. `3001`).
+- **Backend (Terminal 1):**
+  ```bash
+  cd back-classroom
+  npm start
+  ```
+  The backend will listen on the port specified in `config.json` (default: 3001).
 
-**Terminal 2 — Frontend:**
-```bash
-cd front-classroom
-npm start
-```
-El frontend por defecto se despliega en `http://localhost:3000`.
+- **Frontend (Terminal 2):**
+  ```bash
+  cd front-classroom
+  npm start
+  ```
+  The frontend will be available at `http://localhost:3000` by default.
 
+## Usage
 
----
+After starting the application, access the frontend at `http://localhost:3000`. Use the provided sample data from the SQL dump to log in and explore features such as creating classes, posting announcements, assigning tasks, and grading submissions. For detailed workflows, refer to the screenshots above.
+
+````

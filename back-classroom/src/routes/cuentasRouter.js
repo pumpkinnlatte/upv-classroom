@@ -47,6 +47,7 @@ router.post("/refresh-token", async (req, res) => {
     const accessToken = await accountService.refreshAccessToken(refreshToken);
     if (!accessToken) {  
         res.status(401).json({message: "Refresh Token no válido o expirado"});
+        invalidarRefreshToken(refreshToken);
         return;
     }
 
